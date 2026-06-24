@@ -1438,7 +1438,7 @@ select.inp{cursor:pointer}
       <div class="card">
         <div class="card-header"><div class="card-title"><i class="ti ti-receipt" style="color:#3B82F6"></i>Contas fixas</div><span class="card-link">Ver todas</span></div>
         <div id="fin-contas-fixas"></div>
-        <button class="btn-ghost" style="width:100%;justify-content:center;display:flex;margin-top:10px;font-size:11px" onclick="openModal('modal-fin')"><i class="ti ti-plus"></i>Adicionar conta fixa</button>
+        <button class="btn-ghost" style="width:100%;justify-content:center;display:flex;margin-top:10px;font-size:11px" onclick="openNovaContaFixa()"><i class="ti ti-plus"></i>Adicionar conta fixa</button>
       </div>
       <!-- CARTÕES E METAS -->
       <div style="display:flex;flex-direction:column;gap:14px">
@@ -2596,11 +2596,44 @@ select.inp{cursor:pointer}
     <label class="form-label">Descrição</label><input class="inp" id="f-desc" placeholder="Ex: Mensalidade cliente">
     <label class="form-label">Valor (R$)</label><input class="inp" type="number" id="f-val" placeholder="0,00" step="0.01">
     <label class="form-label">Data</label><input class="inp" type="date" id="f-data">
-    <label class="form-label">Categoria</label>
-    <select class="inp" id="f-cat"><option>Casa</option><option>Alimentação</option><option>Transporte</option><option>Saúde</option><option>Educação</option><option>Lazer</option><option>Trabalho</option><option>Outros</option></select>
+    <label class="form-label" style="display:flex;align-items:center;justify-content:space-between">Categoria <span onclick="openModal('modal-categorias')" style="font-size:10px;color:var(--purple2);cursor:pointer;font-weight:600;text-transform:none;letter-spacing:0"><i class="ti ti-settings" style="font-size:12px"></i> Gerenciar categorias</span></label>
+    <select class="inp" id="f-cat"></select>
     <div style="display:flex;gap:10px;margin-top:20px">
       <button class="btn" onclick="addFin()" style="flex:1;justify-content:center"><i class="ti ti-plus"></i>Lançar</button>
       <button class="btn-ghost" onclick="closeModal('modal-fin')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL GERENCIAR CATEGORIAS -->
+<div class="modal-overlay" id="modal-categorias">
+  <div class="modal">
+    <div class="modal-title">Gerenciar Categorias <button class="modal-close" onclick="closeModal('modal-categorias')"><i class="ti ti-x" style="font-size:16px"></i></button></div>
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <input class="inp" id="nova-cat-inp" placeholder="Nome da nova categoria..." style="flex:1">
+      <button class="btn" onclick="addCategoria()" style="padding:9px 16px"><i class="ti ti-plus"></i>Criar</button>
+    </div>
+    <div id="lista-categorias"></div>
+    <div style="margin-top:14px;padding-top:12px;border-top:1px solid #F3F4F6">
+      <button class="btn-ghost" onclick="closeModal('modal-categorias')" style="width:100%;justify-content:center">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CONTAS FIXAS -->
+<div class="modal-overlay" id="modal-conta-fixa">
+  <div class="modal">
+    <div class="modal-title"><span id="conta-fixa-modal-title">Nova Conta Fixa</span> <button class="modal-close" onclick="closeModal('modal-conta-fixa')"><i class="ti ti-x" style="font-size:16px"></i></button></div>
+    <input type="hidden" id="cf-editing-id">
+    <label class="form-label">Ícone (emoji)</label><input class="inp" id="cf-icon" placeholder="🏠 ⚡ 💧" maxlength="4">
+    <label class="form-label">Descrição</label><input class="inp" id="cf-label" placeholder="Ex: Aluguel, Energia elétrica">
+    <label class="form-label">Valor (R$)</label><input class="inp" type="number" id="cf-val" placeholder="0,00" step="0.01">
+    <label class="form-label">Vencimento (dia do mês)</label><input class="inp" type="number" id="cf-vence" placeholder="Ex: 10" min="1" max="31">
+    <label class="form-label">Status</label>
+    <select class="inp" id="cf-pago"><option value="true">✅ Pago</option><option value="false">⏳ Pendente</option></select>
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn" onclick="saveContaFixa()" style="flex:1;justify-content:center"><i class="ti ti-device-floppy"></i>Salvar</button>
+      <button class="btn-ghost" onclick="closeModal('modal-conta-fixa')">Cancelar</button>
     </div>
   </div>
 </div>
@@ -2948,7 +2981,18 @@ function nav(pg){
   renderPage(pg);
 }
 
-function openModal(id){document.getElementById(id).classList.add('open')}
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  if(id==='modal-fin'){
+    // Limpar campos ao abrir
+    document.getElementById('f-desc').value='';
+    document.getElementById('f-val').value='';
+    document.getElementById('f-data').value=today();
+    document.getElementById('f-tipo').value='receita';
+    populateCatSelect();
+  }
+  if(id==='modal-categorias'){renderListaCategorias();populateCatSelect();}
+}
 function closeModal(id){document.getElementById(id).classList.remove('open')}
 document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
 
@@ -3768,7 +3812,73 @@ function addFin(){
   fins.unshift({id:uid(),tipo:document.getElementById('f-tipo').value,desc,valor:val,data:document.getElementById('f-data').value,cat:document.getElementById('f-cat').value});
   S.set('financeiro',fins);closeModal('modal-fin');
   document.getElementById('f-desc').value='';document.getElementById('f-val').value='';
+  document.getElementById('f-data').value='';document.getElementById('f-tipo').value='receita';
   renderFin();if(document.getElementById('page-dashboard').classList.contains('active'))renderFinDash();
+}
+
+// CATEGORIAS FINANCEIRAS
+const catsPadrao=['Casa','Alimentação','Transporte','Saúde','Educação','Lazer','Trabalho','Outros','Salário','Investimentos'];
+function getCategorias(){const c=S.arr('cats_fin');return c.length?c:catsPadrao;}
+function populateCatSelect(){
+  const sel=document.getElementById('f-cat');if(!sel)return;
+  const cats=getCategorias();
+  sel.innerHTML=cats.map(c=>`<option value="${c}">${c}</option>`).join('');
+}
+function openNovaContaFixa(){
+  document.getElementById('cf-editing-id').value='';
+  document.getElementById('conta-fixa-modal-title').textContent='Nova Conta Fixa';
+  ['cf-icon','cf-label','cf-val','cf-vence'].forEach(x=>document.getElementById(x).value='');
+  document.getElementById('cf-pago').value='false';
+  openModal('modal-conta-fixa');
+}
+function editContaFixa(id){
+  const contas=S.arr('contas_fixas');const c=contas.find(x=>x.id===id);if(!c)return;
+  document.getElementById('cf-editing-id').value=id;
+  document.getElementById('conta-fixa-modal-title').textContent='Editar Conta Fixa';
+  document.getElementById('cf-icon').value=c.icon||'';
+  document.getElementById('cf-label').value=c.label||'';
+  document.getElementById('cf-val').value=c.val||'';
+  document.getElementById('cf-vence').value=c.vence||'';
+  document.getElementById('cf-pago').value=c.pago?'true':'false';
+  openModal('modal-conta-fixa');
+}
+function saveContaFixa(){
+  const label=document.getElementById('cf-label').value.trim();if(!label)return;
+  const editId=document.getElementById('cf-editing-id').value;
+  const val=parseFloat(document.getElementById('cf-val').value)||0;
+  const contas=S.arr('contas_fixas');
+  if(editId){
+    const c=contas.find(x=>x.id===editId);
+    if(c){c.icon=document.getElementById('cf-icon').value||'💰';c.label=label;c.val=val;c.vence=document.getElementById('cf-vence').value;c.pago=document.getElementById('cf-pago').value==='true';}
+  } else {
+    contas.push({id:uid(),icon:document.getElementById('cf-icon').value||'💰',label,val,vence:document.getElementById('cf-vence').value,pago:document.getElementById('cf-pago').value==='true'});
+  }
+  S.set('contas_fixas',contas);closeModal('modal-conta-fixa');renderFin();showToast('Conta fixa salva! 💾');
+}
+function deleteContaFixa(id){S.set('contas_fixas',S.arr('contas_fixas').filter(x=>x.id!==id));renderFin();}
+function toggleContaFixaPago(id){
+  const contas=S.arr('contas_fixas');const c=contas.find(x=>x.id===id);
+  if(c)c.pago=!c.pago;S.set('contas_fixas',contas);renderFin();
+}
+function addCategoria(){
+  const inp=document.getElementById('nova-cat-inp');const nome=inp.value.trim();if(!nome)return;
+  const cats=getCategorias();
+  if(cats.includes(nome)){showToast('Categoria já existe!');return;}
+  cats.push(nome);S.set('cats_fin',cats);inp.value='';
+  renderListaCategorias();populateCatSelect();showToast('Categoria criada! ✅');
+}
+function deleteCategoria(nome){
+  const cats=getCategorias().filter(c=>c!==nome);
+  S.set('cats_fin',cats.length?cats:catsPadrao);
+  renderListaCategorias();populateCatSelect();
+}
+function renderListaCategorias(){
+  const el=document.getElementById('lista-categorias');if(!el)return;
+  const cats=getCategorias();
+  el.innerHTML=cats.map(c=>`<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #F3F4F6">
+    <div style="flex:1;font-size:13px;color:var(--text)">${c}</div>
+    <button onclick="deleteCategoria('${c}')" style="background:none;border:none;color:#EF4444;cursor:pointer;font-size:12px;padding:4px 8px;border-radius:6px;background:#FEF2F2"><i class="ti ti-trash" style="font-size:13px"></i></button>
+  </div>`).join('')||'<div style="font-size:12px;color:var(--text3);padding:8px 0">Nenhuma categoria</div>';
 }
 
 function saveReserva(){
@@ -4268,22 +4378,27 @@ function renderFin(){
     <div style="font-size:11px;font-weight:700;color:var(--text);min-width:72px;text-align:right">${c.val}</div>
   </div>`).join('');
 
-  // Contas fixas
-  const contas=[
-    {icon:'🏠',label:'Aluguel',val:'R$2.500,00',vence:'01/06',pago:true},
-    {icon:'⚡',label:'Energia elétrica',val:'R$320,00',vence:'10/06',pago:true},
-    {icon:'💧',label:'Água',val:'R$210,00',vence:'11/06',pago:true},
-    {icon:'🌐',label:'Internet',val:'R$129,90',vence:'15/06',pago:true},
-    {icon:'❤️',label:'Plano de saúde',val:'R$489,90',vence:'20/06',pago:true},
-    {icon:'🎒',label:'Escola Esmeralda',val:'R$1.250,00',vence:'10/06',pago:true},
-    {icon:'🎒',label:'Escola Rodolfo',val:'R$1.250,00',vence:'10/06',pago:true},
-  ];
+  // Contas fixas — dinâmicas
+  const contasFixasCustom=S.arr('contas_fixas');
   const contEl=document.getElementById('fin-contas-fixas');
-  if(contEl)contEl.innerHTML=contas.map(c=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #F3F4F6">
-    <span style="font-size:16px;flex-shrink:0">${c.icon}</span>
-    <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--text)">${c.label}</div><div style="font-size:10px;color:var(--text3)">Vence: ${c.vence}</div></div>
-    <div style="text-align:right"><div style="font-size:11px;font-weight:700;color:var(--text)">${c.val}</div><span style="font-size:9px;background:#ECFDF5;color:#10B981;padding:1px 7px;border-radius:99px;font-weight:600">Pago</span></div>
-  </div>`).join('');
+  if(contEl){
+    if(!contasFixasCustom.length){
+      contEl.innerHTML=`<div style="text-align:center;padding:16px;color:var(--text3);font-size:12px"><i class="ti ti-receipt" style="font-size:24px;display:block;margin-bottom:6px;opacity:.3"></i>Nenhuma conta fixa cadastrada.<br>Clique em "+ Adicionar conta fixa" abaixo.</div>`;
+    } else {
+      contEl.innerHTML=contasFixasCustom.map(c=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #F3F4F6">
+        <span style="font-size:16px;flex-shrink:0">${c.icon||'💰'}</span>
+        <div style="flex:1;cursor:pointer" onclick="toggleContaFixaPago('${c.id}')"><div style="font-size:11.5px;font-weight:600;color:var(--text)">${c.label}</div><div style="font-size:10px;color:var(--text3)">Vence: dia ${c.vence||'?'}</div></div>
+        <div style="text-align:right">
+          <div style="font-size:11px;font-weight:700;color:var(--text)">R$ ${parseFloat(c.val||0).toLocaleString('pt-BR',{minimumFractionDigits:2})}</div>
+          <span style="font-size:9px;background:${c.pago?'#ECFDF5':'#FEF2F2'};color:${c.pago?'#10B981':'#EF4444'};padding:1px 7px;border-radius:99px;font-weight:600;cursor:pointer">${c.pago?'✅ Pago':'⏳ Pendente'}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <button onclick="editContaFixa('${c.id}')" style="background:none;border:none;color:var(--purple2);cursor:pointer"><i class="ti ti-pencil" style="font-size:12px"></i></button>
+          <button onclick="deleteContaFixa('${c.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="ti ti-trash" style="font-size:12px"></i></button>
+        </div>
+      </div>`).join('');
+    }
+  }
 
   // Cartões — usa dados do localStorage se disponíveis
   const cartoesCustom=S.arr('cartoes_custom');
@@ -4917,7 +5032,7 @@ const ALL_KEYS = [
   'vacinas','elite_tasks','projetos_custom','cartoes_custom','metas_fin_custom',
   'notas_casa','bianca2_events','bianca2_habits','bianca2_tasks',
   'bianca2_notas_mes','bianca2_memorias','bianca2_casa_rotinas_done',
-  'cap_items','cap_notas'
+  'cap_items','cap_notas','contas_fixas','cats_fin'
 ];
 
 async function loadAllFromSupabase(){
