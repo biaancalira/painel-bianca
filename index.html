@@ -1328,37 +1328,35 @@ select.inp{cursor:pointer}
           <div style="width:36px;height:36px;border-radius:10px;background:#EDE9FE;display:flex;align-items:center;justify-content:center"><i class="ti ti-wallet" style="color:var(--purple2);font-size:18px"></i></div>
           <div style="font-size:11px;color:var(--text3);font-weight:500">Saldo total</div>
         </div>
-        <div style="font-size:20px;font-weight:900;color:var(--text)" id="fp-saldo-total">R$ 12.540,75</div>
-        <div style="font-size:10px;color:var(--text3);margin-top:4px">Atualizado hoje</div>
+        <div style="font-size:20px;font-weight:900;color:var(--text)" id="fp-saldo-total">R$ 0,00</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:4px" id="fp-saldo-sub">Nenhum lançamento ainda</div>
       </div>
       <div class="card">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
           <div style="width:36px;height:36px;border-radius:10px;background:#ECFDF5;display:flex;align-items:center;justify-content:center"><i class="ti ti-trending-up" style="color:#10B981;font-size:18px"></i></div>
           <div style="font-size:11px;color:var(--text3);font-weight:500">Receitas (mês)</div>
         </div>
-        <div style="font-size:20px;font-weight:900;color:#10B981" id="fp-rec">R$ 28.750,00</div>
-        <div style="font-size:10px;color:var(--text3);margin-top:2px">Meta: R$ 30.000,00</div>
-        <div style="height:4px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-top:6px"><div style="height:100%;background:#10B981;border-radius:99px;width:96%"></div></div>
-        <div style="font-size:10px;color:#10B981;font-weight:600;margin-top:2px">96%</div>
+        <div style="font-size:20px;font-weight:900;color:#10B981" id="fp-rec">R$ 0,00</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:2px" id="fp-rec-sub">Nenhuma receita lançada</div>
+        <div style="height:4px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-top:6px"><div id="fp-rec-bar" style="height:100%;background:#10B981;border-radius:99px;width:0%"></div></div>
       </div>
       <div class="card">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
           <div style="width:36px;height:36px;border-radius:10px;background:#FEF2F2;display:flex;align-items:center;justify-content:center"><i class="ti ti-trending-down" style="color:#EF4444;font-size:18px"></i></div>
           <div style="font-size:11px;color:var(--text3);font-weight:500">Despesas (mês)</div>
         </div>
-        <div style="font-size:20px;font-weight:900;color:#EF4444" id="fp-desp">R$ 16.209,25</div>
-        <div style="font-size:10px;color:var(--text3);margin-top:2px">Meta: R$ 20.000,00</div>
-        <div style="height:4px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-top:6px"><div style="height:100%;background:#EF4444;border-radius:99px;width:81%"></div></div>
-        <div style="font-size:10px;color:#EF4444;font-weight:600;margin-top:2px">81%</div>
+        <div style="font-size:20px;font-weight:900;color:#EF4444" id="fp-desp">R$ 0,00</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:2px" id="fp-desp-sub">Nenhuma despesa lançada</div>
+        <div style="height:4px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-top:6px"><div id="fp-desp-bar" style="height:100%;background:#EF4444;border-radius:99px;width:0%"></div></div>
       </div>
       <div class="card">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
           <div style="width:36px;height:36px;border-radius:10px;background:#FFF7ED;display:flex;align-items:center;justify-content:center"><i class="ti ti-piggy-bank" style="color:#F59E0B;font-size:18px"></i></div>
           <div style="font-size:11px;color:var(--text3);font-weight:500">Economia (mês)</div>
         </div>
-        <div style="font-size:20px;font-weight:900;color:#F59E0B" id="fp-res">R$ 12.540,75</div>
-        <div style="font-size:10px;color:var(--text3);margin-top:2px">43% da receita</div>
-        <div style="height:4px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-top:6px"><div style="height:100%;background:#F59E0B;border-radius:99px;width:43%"></div></div>
+        <div style="font-size:20px;font-weight:900;color:#F59E0B" id="fp-res">R$ 0,00</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:2px" id="fp-res-pct">0% da receita</div>
+        <div style="height:4px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-top:6px"><div id="fp-res-bar2" style="height:100%;background:#F59E0B;border-radius:99px;width:0%"></div></div>
       </div>
     </div>
 
@@ -1368,22 +1366,18 @@ select.inp{cursor:pointer}
       <div class="card">
         <div class="card-header">
           <div class="card-title"><i class="ti ti-chart-pie" style="color:var(--purple2)"></i>Resumo financeiro do mês</div>
-          <span style="font-size:11px;color:#EC4899;font-weight:600">Junho / 2025</span>
+          <span style="font-size:11px;color:#EC4899;font-weight:600" id="fp-mes-label"></span>
         </div>
         <div style="display:flex;gap:20px;align-items:center">
           <div style="position:relative;flex-shrink:0">
             <canvas id="donut-fin-full" width="130" height="130"></canvas>
             <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
               <div style="font-size:9px;color:var(--text3)">Receitas</div>
-              <div style="font-size:12px;font-weight:800;color:var(--text)">R$28.750</div>
+              <div style="font-size:12px;font-weight:800;color:var(--text)" id="fp-donut-rec-label">R$0</div>
             </div>
           </div>
-          <div style="flex:1">
-            <div style="font-size:10px;color:var(--text3);margin-bottom:8px">Despesas: <strong style="color:var(--text)">R$ 16.209,25</strong></div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div style="width:10px;height:10px;border-radius:2px;background:#10B981;flex-shrink:0"></div><div style="flex:1;font-size:11px;color:var(--text2)">Salário / Trabalho</div><div style="font-size:11px;font-weight:600;color:var(--text)">63% · R$18.500</div></div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div style="width:10px;height:10px;border-radius:2px;background:#EC4899;flex-shrink:0"></div><div style="flex:1;font-size:11px;color:var(--text2)">ELIT3 GREEN</div><div style="font-size:11px;font-weight:600;color:var(--text)">21% · R$6.000</div></div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div style="width:10px;height:10px;border-radius:2px;background:#F59E0B;flex-shrink:0"></div><div style="flex:1;font-size:11px;color:var(--text2)">Papelaria</div><div style="font-size:11px;font-weight:600;color:var(--text)">8% · R$2.250</div></div>
-            <div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;border-radius:2px;background:#8B5CF6;flex-shrink:0"></div><div style="flex:1;font-size:11px;color:var(--text2)">Outros</div><div style="font-size:11px;font-weight:600;color:var(--text)">8% · R$2.000</div></div>
+          <div style="flex:1" id="fp-resumo-cats">
+            <div style="font-size:12px;color:var(--text3);padding:8px 0">Nenhum lançamento no mês.<br>Use "Novo Lançamento" para começar.</div>
           </div>
         </div>
       </div>
@@ -1393,35 +1387,8 @@ select.inp{cursor:pointer}
           <div class="card-title"><i class="ti ti-chart-line" style="color:#10B981"></i>Evolução mensal</div>
           <span style="font-size:10px;color:var(--text3)">Últimos 6 meses</span>
         </div>
-        <div style="display:flex;gap:16px">
-          <div style="flex:1;position:relative;height:120px">
-            <svg width="100%" height="120" viewBox="0 0 300 120" preserveAspectRatio="none" style="overflow:visible">
-              <!-- Receitas -->
-              <polyline points="0,80 60,72 120,68 180,64 240,58 300,50" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <!-- Despesas -->
-              <polyline points="0,100 60,95 120,90 180,88 240,85 300,82" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <!-- Economia -->
-              <polyline points="0,110 60,106 120,104 180,100 240,98 300,92" fill="none" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <!-- Dots receitas -->
-              <circle cx="0" cy="80" r="4" fill="#10B981"/><circle cx="60" cy="72" r="4" fill="#10B981"/><circle cx="120" cy="68" r="4" fill="#10B981"/><circle cx="180" cy="64" r="4" fill="#10B981"/><circle cx="240" cy="58" r="4" fill="#10B981"/><circle cx="300" cy="50" r="4" fill="#10B981"/>
-              <!-- Dots despesas -->
-              <circle cx="0" cy="100" r="4" fill="#EF4444"/><circle cx="300" cy="82" r="4" fill="#EF4444"/>
-              <!-- Dots economia -->
-              <circle cx="0" cy="110" r="4" fill="#8B5CF6"/><circle cx="300" cy="92" r="4" fill="#8B5CF6"/>
-              <!-- X labels -->
-              <text x="0" y="118" fill="#9CA3AF" font-size="9" font-family="Inter">Jan</text>
-              <text x="52" y="118" fill="#9CA3AF" font-size="9" font-family="Inter">Fev</text>
-              <text x="110" y="118" fill="#9CA3AF" font-size="9" font-family="Inter">Mar</text>
-              <text x="168" y="118" fill="#9CA3AF" font-size="9" font-family="Inter">Abr</text>
-              <text x="226" y="118" fill="#9CA3AF" font-size="9" font-family="Inter">Mai</text>
-              <text x="284" y="118" fill="#9CA3AF" font-size="9" font-family="Inter">Jun</text>
-            </svg>
-          </div>
-          <div style="display:flex;flex-direction:column;justify-content:center;gap:8px;min-width:110px">
-            <div><div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text2)"><div style="width:12px;height:2px;background:#10B981;border-radius:2px"></div>Receitas</div><div style="font-size:13px;font-weight:800;color:#10B981">R$28.750</div></div>
-            <div><div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text2)"><div style="width:12px;height:2px;background:#EF4444;border-radius:2px"></div>Despesas</div><div style="font-size:13px;font-weight:800;color:#EF4444">R$16.209</div></div>
-            <div><div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text2)"><div style="width:12px;height:2px;background:#8B5CF6;border-radius:2px"></div>Economia</div><div style="font-size:13px;font-weight:800;color:#8B5CF6">R$12.540</div></div>
-          </div>
+        <div id="fp-evolucao-wrap">
+          <div style="font-size:12px;color:var(--text3);padding:20px 0;text-align:center">Gráfico disponível após lançamentos.</div>
         </div>
       </div>
     </div>
@@ -1430,13 +1397,13 @@ select.inp{cursor:pointer}
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">
       <!-- DESPESAS POR CATEGORIA -->
       <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-list" style="color:#EF4444"></i>Despesas por categoria</div><span class="card-link">Ver detalhes</span></div>
+        <div class="card-header"><div class="card-title"><i class="ti ti-list" style="color:#EF4444"></i>Despesas por categoria</div></div>
         <div id="fin-cats-full"></div>
-        <div style="margin-top:10px;padding-top:10px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span style="color:var(--text2)">Total</span><span style="color:#EF4444">R$ 16.209,25</span></div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span style="color:var(--text2)">Total</span><span style="color:#EF4444" id="fin-cats-total">R$ 0,00</span></div>
       </div>
       <!-- CONTAS FIXAS -->
       <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-receipt" style="color:#3B82F6"></i>Contas fixas</div><span class="card-link">Ver todas</span></div>
+        <div class="card-header"><div class="card-title"><i class="ti ti-receipt" style="color:#3B82F6"></i>Contas fixas</div><span class="card-link" onclick="openNovaContaFixa()">+ Adicionar</span></div>
         <div id="fin-contas-fixas"></div>
         <button class="btn-ghost" style="width:100%;justify-content:center;display:flex;margin-top:10px;font-size:11px" onclick="openNovaContaFixa()"><i class="ti ti-plus"></i>Adicionar conta fixa</button>
       </div>
@@ -1454,32 +1421,33 @@ select.inp{cursor:pointer}
       </div>
     </div>
 
-    <!-- ÚLTIMAS RECEITAS + DESPESAS + PLANEJAMENTO + DICAS -->
+    <!-- ÚLTIMAS RECEITAS + DESPESAS -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
-      <div class="card"><div class="card-header"><div class="card-title"><i class="ti ti-trending-up" style="color:#10B981"></i>Últimas receitas</div><span class="card-link">Ver todas</span></div><div id="fin-receitas-list"></div><div style="margin-top:10px;padding-top:8px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span>Total</span><span style="color:#10B981">R$ 28.750,00</span></div></div>
-      <div class="card"><div class="card-header"><div class="card-title"><i class="ti ti-trending-down" style="color:#EF4444"></i>Últimas despesas</div><span class="card-link">Ver todas</span></div><div id="fin-despesas-list"></div><div style="margin-top:10px;padding-top:8px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span>Total</span><span style="color:#EF4444">R$ 16.209,25</span></div></div>
-    </div>
-
-    <!-- PLANEJAMENTO + DICAS -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
       <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-calendar-stats" style="color:var(--purple2)"></i>Planejamento do mês</div><span style="font-size:11px;color:#EC4899;font-weight:600">Junho / 2025</span></div>
-        <div id="fin-planejamento"></div>
+        <div class="card-header"><div class="card-title"><i class="ti ti-trending-up" style="color:#10B981"></i>Últimas receitas</div><span class="card-link" onclick="nav('financeiro')">Ver todas</span></div>
+        <div id="fin-receitas-list"></div>
+        <div style="margin-top:10px;padding-top:8px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span>Total</span><span style="color:#10B981" id="fin-rec-total-label">R$ 0,00</span></div>
       </div>
       <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-bulb" style="color:#F59E0B"></i>Dicas financeiras para você</div><span class="card-link">Ver todas</span></div>
-        <div style="background:#ECFDF5;border-radius:10px;padding:10px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start">
-          <div style="width:28px;height:28px;border-radius:8px;background:#10B98120;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-mood-happy" style="color:#10B981;font-size:14px"></i></div>
-          <div style="font-size:11.5px;color:#065F46;line-height:1.5"><strong>Você está indo muito bem!</strong><br>Sua taxa de economia este mês está excelente: 43% da sua receita.</div>
+        <div class="card-header"><div class="card-title"><i class="ti ti-trending-down" style="color:#EF4444"></i>Últimas despesas</div><span class="card-link" onclick="nav('financeiro')">Ver todas</span></div>
+        <div id="fin-despesas-list"></div>
+        <div style="margin-top:10px;padding-top:8px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span>Total</span><span style="color:#EF4444" id="fin-desp-total-label">R$ 0,00</span></div>
+      </div>
+    </div>
+
+    <!-- TODOS OS LANÇAMENTOS (lista completa com delete) -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="card">
+        <div class="card-header"><div class="card-title"><i class="ti ti-calendar-stats" style="color:var(--purple2)"></i>Todos os lançamentos</div></div>
+        <div style="margin-bottom:10px;display:flex;gap:8px">
+          <select class="inp" id="fin-filter-tipo" onchange="renderFin()" style="flex:1;font-size:11px;padding:6px 10px"><option value="">Todos</option><option value="receita">Receitas</option><option value="despesa">Despesas</option></select>
+          <select class="inp" id="fin-filter-cat" onchange="renderFin()" style="flex:1;font-size:11px;padding:6px 10px"><option value="">Todas categorias</option></select>
         </div>
-        <div style="background:#FFF7ED;border-radius:10px;padding:10px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start">
-          <div style="width:28px;height:28px;border-radius:8px;background:#F59E0B20;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-eye" style="color:#F59E0B;font-size:14px"></i></div>
-          <div style="font-size:11.5px;color:#92400E;line-height:1.5"><strong>Reveja seus gastos com lazer</strong><br>Este mês, os gastos com lazer aumentaram 18% em relação ao mês anterior.</div>
-        </div>
-        <div style="background:#EDE9FE;border-radius:10px;padding:10px;display:flex;gap:10px;align-items:flex-start">
-          <div style="width:28px;height:28px;border-radius:8px;background:#8B5CF620;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-school" style="color:#8B5CF6;font-size:14px"></i></div>
-          <div style="font-size:11.5px;color:#4C1D95;line-height:1.5"><strong>Continue investindo em você</strong><br>Manter o fundo de estudos é essencial para o seu crescimento pessoal e profissional.</div>
-        </div>
+        <div id="fin-todos-lancamentos"></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title"><i class="ti ti-bulb" style="color:#F59E0B"></i>Dicas financeiras</div></div>
+        <div id="fin-dicas"></div>
       </div>
     </div>
   </div>
@@ -4359,24 +4327,160 @@ function openNewProject(){openModal('modal-projeto');}
 
 
 function renderFin(){
-  // Categorias de despesas
-  const catsFin=[
-    {icon:'ti-home-2',label:'Moradia (aluguel, água, luz, internet)',pct:40,val:'R$6.483,70',color:'#10B981'},
-    {icon:'ti-salad',label:'Alimentação (mercado, lanches)',pct:18,val:'R$2.916,80',color:'#EC4899'},
-    {icon:'ti-car',label:'Transporte (combustível, manutenção)',pct:10,val:'R$1.620,90',color:'#F59E0B'},
-    {icon:'ti-heart-rate-monitor',label:'Saúde (médicos, farmácia, exames)',pct:7,val:'R$1.134,60',color:'#EF4444'},
-    {icon:'ti-school',label:'Educação (escola, cursos, livros)',pct:6,val:'R$972,45',color:'#8B5CF6'},
-    {icon:'ti-beach',label:'Lazer (passeios, viagens, restaurantes)',pct:5,val:'R$810,50',color:'#3B82F6'},
-    {icon:'ti-home',label:'Casa (produtos, manutenção, limpeza)',pct:5,val:'R$810,40',color:'#2DD4BF'},
-    {icon:'ti-gift',label:'Outros (presentes, imprevistos)',pct:9,val:'R$1.458,30',color:'#9CA3AF'},
-  ];
+  const fins=S.arr('financeiro');
+  const now=new Date();
+  const anoAtual=now.getFullYear();
+  const mesAtual=now.getMonth(); // 0-based
+
+  // Label do mês atual
+  const mesNome=now.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+  const mesCapit=mesNome.charAt(0).toUpperCase()+mesNome.slice(1);
+  const fpMes=document.getElementById('fp-mes-label');
+  if(fpMes)fpMes.textContent=mesCapit;
+
+  // Filtrar lançamentos do mês atual
+  const doMes=fins.filter(f=>{
+    if(!f.data)return false;
+    const d=new Date(f.data+'T12:00');
+    return d.getMonth()===mesAtual && d.getFullYear()===anoAtual;
+  });
+
+  const rec=doMes.filter(f=>f.tipo==='receita').reduce((a,b)=>a+(b.valor||0),0);
+  const desp=doMes.filter(f=>f.tipo==='despesa').reduce((a,b)=>a+(b.valor||0),0);
+  const saldo=rec-desp;
+  const economia=rec-desp;
+  const econPct=rec>0?Math.round(economia/rec*100):0;
+
+  const fmtBR=(v)=>v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const fmtR=(v)=>'R$ '+fmtBR(v);
+
+  // Métricas topo
+  const elSaldo=document.getElementById('fp-saldo-total');
+  if(elSaldo)elSaldo.textContent=fmtR(saldo);
+  if(elSaldo)elSaldo.style.color=saldo>=0?'var(--text)':'#EF4444';
+  const elSaldoSub=document.getElementById('fp-saldo-sub');
+  if(elSaldoSub)elSaldoSub.textContent=fins.length?'Receitas − Despesas':'Nenhum lançamento ainda';
+
+  const elRec=document.getElementById('fp-rec');
+  if(elRec)elRec.textContent=fmtR(rec);
+  const elRecSub=document.getElementById('fp-rec-sub');
+  if(elRecSub)elRecSub.textContent=rec>0?doMes.filter(f=>f.tipo==='receita').length+' receita(s) no mês':'Nenhuma receita lançada';
+
+  const elDesp=document.getElementById('fp-desp');
+  if(elDesp)elDesp.textContent=fmtR(desp);
+  const elDespSub=document.getElementById('fp-desp-sub');
+  if(elDespSub)elDespSub.textContent=desp>0?doMes.filter(f=>f.tipo==='despesa').length+' despesa(s) no mês':'Nenhuma despesa lançada';
+
+  const elRes=document.getElementById('fp-res');
+  if(elRes)elRes.textContent=fmtR(economia);
+  const elResPct=document.getElementById('fp-res-pct');
+  if(elResPct)elResPct.textContent=econPct+'% da receita';
+  const elResBar=document.getElementById('fp-res-bar2');
+  if(elResBar)elResBar.style.width=Math.min(econPct,100)+'%';
+
+  // Donut e resumo por categorias de receita
+  const donutLabel=document.getElementById('fp-donut-rec-label');
+  if(donutLabel)donutLabel.textContent='R$'+Math.round(rec).toLocaleString('pt-BR');
+
+  // Agrupar receitas por categoria para o resumo
+  const catColors2=['#10B981','#EC4899','#F59E0B','#8B5CF6','#3B82F6','#06B6D4','#EF4444','#9CA3AF'];
+  const recByCat={};
+  doMes.filter(f=>f.tipo==='receita').forEach(f=>{
+    const c=f.cat||'Outros';
+    recByCat[c]=(recByCat[c]||0)+(f.valor||0);
+  });
+  const catResumoEl=document.getElementById('fp-resumo-cats');
+  if(catResumoEl){
+    if(!doMes.length){
+      catResumoEl.innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px 0">Nenhum lançamento no mês.<br>Clique em "Novo Lançamento" para começar.</div>';
+    } else {
+      const catEntries=Object.entries(recByCat).sort((a,b)=>b[1]-a[1]);
+      catResumoEl.innerHTML=`<div style="font-size:10px;color:var(--text3);margin-bottom:8px">Despesas: <strong style="color:var(--text)">${fmtR(desp)}</strong></div>`+
+        (catEntries.length?catEntries.map(([cat,val],i)=>{
+          const pct=rec>0?Math.round(val/rec*100):0;
+          return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+            <div style="width:10px;height:10px;border-radius:2px;background:${catColors2[i%catColors2.length]};flex-shrink:0"></div>
+            <div style="flex:1;font-size:11px;color:var(--text2)">${cat}</div>
+            <div style="font-size:11px;font-weight:600;color:var(--text)">${pct}% · R$${Math.round(val).toLocaleString('pt-BR')}</div>
+          </div>`;
+        }).join(''):'');
+    }
+  }
+
+  // Donut canvas
+  const canvas=document.getElementById('donut-fin-full');
+  if(canvas){
+    const ctx=canvas.getContext('2d');
+    ctx.clearRect(0,0,130,130);
+    const catEntries=Object.entries(recByCat).sort((a,b)=>b[1]-a[1]);
+    if(rec>0 && catEntries.length){
+      let start=-Math.PI/2;const cx=65,cy=65,r=58,inner=38;
+      catEntries.forEach(([cat,val],i)=>{const angle=(val/rec)*Math.PI*2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,start,start+angle);ctx.closePath();ctx.fillStyle=catColors2[i%catColors2.length];ctx.fill();start+=angle;});
+      ctx.beginPath();ctx.arc(cx,cy,inner,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+    } else {
+      // Empty donut
+      ctx.beginPath();ctx.arc(65,65,58,0,Math.PI*2);ctx.fillStyle='#F3F4F6';ctx.fill();
+      ctx.beginPath();ctx.arc(65,65,38,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+    }
+  }
+
+  // Evolução mensal — últimos 6 meses com dados reais
+  const evolEl=document.getElementById('fp-evolucao-wrap');
+  if(evolEl){
+    const meses=[];
+    for(let i=5;i>=0;i--){
+      const d=new Date(anoAtual,mesAtual-i,1);
+      meses.push({ano:d.getFullYear(),mes:d.getMonth(),label:d.toLocaleDateString('pt-BR',{month:'short'})});
+    }
+    const mRec=meses.map(m=>fins.filter(f=>f.tipo==='receita'&&f.data&&new Date(f.data+'T12:00').getMonth()===m.mes&&new Date(f.data+'T12:00').getFullYear()===m.ano).reduce((a,b)=>a+(b.valor||0),0));
+    const mDesp=meses.map(m=>fins.filter(f=>f.tipo==='despesa'&&f.data&&new Date(f.data+'T12:00').getMonth()===m.mes&&new Date(f.data+'T12:00').getFullYear()===m.ano).reduce((a,b)=>a+(b.valor||0),0));
+    const mEcon=mRec.map((r,i)=>Math.max(0,r-mDesp[i]));
+    const maxVal=Math.max(...mRec,...mDesp,...mEcon,1);
+    const px=(v)=>Math.round(100-((v/maxVal)*85));
+    const pts=(arr)=>arr.map((v,i)=>`${i*60},${px(v)}`).join(' ');
+    const totalRec=mRec[mRec.length-1];const totalDesp=mDesp[mDesp.length-1];const totalEcon=mEcon[mEcon.length-1];
+    evolEl.innerHTML=`<div style="display:flex;gap:16px">
+      <div style="flex:1;position:relative;height:120px">
+        <svg width="100%" height="110" viewBox="0 0 300 110" preserveAspectRatio="none" style="overflow:visible">
+          <polyline points="${pts(mRec)}" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="${pts(mDesp)}" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="${pts(mEcon)}" fill="none" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          ${meses.map((m,i)=>`<text x="${i*60}" y="108" fill="#9CA3AF" font-size="9" font-family="Inter" text-anchor="middle">${m.label}</text>`).join('')}
+        </svg>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:8px;min-width:110px">
+        <div><div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text2)"><div style="width:12px;height:2px;background:#10B981;border-radius:2px"></div>Receitas</div><div style="font-size:13px;font-weight:800;color:#10B981">${fmtR(totalRec)}</div></div>
+        <div><div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text2)"><div style="width:12px;height:2px;background:#EF4444;border-radius:2px"></div>Despesas</div><div style="font-size:13px;font-weight:800;color:#EF4444">${fmtR(totalDesp)}</div></div>
+        <div><div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text2)"><div style="width:12px;height:2px;background:#8B5CF6;border-radius:2px"></div>Economia</div><div style="font-size:13px;font-weight:800;color:#8B5CF6">${fmtR(totalEcon)}</div></div>
+      </div>
+    </div>`;
+  }
+
+  // Despesas por categoria (do mês)
+  const despByCat={};
+  doMes.filter(f=>f.tipo==='despesa').forEach(f=>{
+    const c=f.cat||'Outros';
+    despByCat[c]=(despByCat[c]||0)+(f.valor||0);
+  });
   const catEl=document.getElementById('fin-cats-full');
-  if(catEl)catEl.innerHTML=catsFin.map(c=>`<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #F3F4F6">
-    <i class="ti ${c.icon}" style="color:${c.color};font-size:15px;flex-shrink:0;width:18px"></i>
-    <div style="flex:1"><div style="font-size:11px;color:var(--text2)">${c.label}</div></div>
-    <div style="font-size:10px;font-weight:600;color:var(--text3);min-width:24px">${c.pct}%</div>
-    <div style="font-size:11px;font-weight:700;color:var(--text);min-width:72px;text-align:right">${c.val}</div>
-  </div>`).join('');
+  if(catEl){
+    const catDespEntries=Object.entries(despByCat).sort((a,b)=>b[1]-a[1]);
+    if(!catDespEntries.length){
+      catEl.innerHTML='<div style="font-size:12px;color:var(--text3);padding:10px 0">Nenhuma despesa lançada neste mês.</div>';
+    } else {
+      catEl.innerHTML=catDespEntries.map(([cat,val],i)=>{
+        const pct=desp>0?Math.round(val/desp*100):0;
+        return `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #F3F4F6">
+          <div style="width:10px;height:10px;border-radius:2px;background:${catColors2[i%catColors2.length]};flex-shrink:0"></div>
+          <div style="flex:1;font-size:11px;color:var(--text2)">${cat}</div>
+          <div style="font-size:10px;font-weight:600;color:var(--text3);min-width:28px">${pct}%</div>
+          <div style="font-size:11px;font-weight:700;color:var(--text);min-width:72px;text-align:right">${fmtR(val)}</div>
+        </div>`;
+      }).join('');
+    }
+  }
+  const catsTotalEl=document.getElementById('fin-cats-total');
+  if(catsTotalEl)catsTotalEl.textContent=fmtR(desp);
 
   // Contas fixas — dinâmicas
   const contasFixasCustom=S.arr('contas_fixas');
@@ -4387,10 +4491,10 @@ function renderFin(){
     } else {
       contEl.innerHTML=contasFixasCustom.map(c=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #F3F4F6">
         <span style="font-size:16px;flex-shrink:0">${c.icon||'💰'}</span>
-        <div style="flex:1;cursor:pointer" onclick="toggleContaFixaPago('${c.id}')"><div style="font-size:11.5px;font-weight:600;color:var(--text)">${c.label}</div><div style="font-size:10px;color:var(--text3)">Vence: dia ${c.vence||'?'}</div></div>
+        <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--text)">${c.label}</div><div style="font-size:10px;color:var(--text3)">Vence: dia ${c.vence||'?'}</div></div>
         <div style="text-align:right">
-          <div style="font-size:11px;font-weight:700;color:var(--text)">R$ ${parseFloat(c.val||0).toLocaleString('pt-BR',{minimumFractionDigits:2})}</div>
-          <span style="font-size:9px;background:${c.pago?'#ECFDF5':'#FEF2F2'};color:${c.pago?'#10B981':'#EF4444'};padding:1px 7px;border-radius:99px;font-weight:600;cursor:pointer">${c.pago?'✅ Pago':'⏳ Pendente'}</span>
+          <div style="font-size:11px;font-weight:700;color:var(--text)">${fmtR(parseFloat(c.val||0))}</div>
+          <span onclick="toggleContaFixaPago('${c.id}')" style="font-size:9px;background:${c.pago?'#ECFDF5':'#FEF2F2'};color:${c.pago?'#10B981':'#EF4444'};padding:1px 7px;border-radius:99px;font-weight:600;cursor:pointer">${c.pago?'✅ Pago':'⏳ Pendente'}</span>
         </div>
         <div style="display:flex;flex-direction:column;gap:2px">
           <button onclick="editContaFixa('${c.id}')" style="background:none;border:none;color:var(--purple2);cursor:pointer"><i class="ti ti-pencil" style="font-size:12px"></i></button>
@@ -4422,80 +4526,113 @@ function renderFin(){
     }
   }
 
-  // Metas financeiras — usa dados do localStorage se disponíveis
+  // Metas financeiras
   const metasFinCustom=S.arr('metas_fin_custom');
-  const metasFinDefault=[
-    {id:'mfd1',emoji:'🏦',label:'Reserva de emergência',meta:'R$30.000,00',pct:70,atual:'R$14.000',color:'#10B981'},
-    {id:'mfd2',emoji:'✈️',label:'Viagem em família',meta:'R$10.000,00',pct:45,atual:'R$4.500',color:'#8B5CF6'},
-    {id:'mfd3',emoji:'🏠',label:'Reforma da casa',meta:'R$15.000,00',pct:30,atual:'R$4.500',color:'#F59E0B'},
-    {id:'mfd4',emoji:'📚',label:'Fundo para estudos',meta:'R$8.000,00',pct:60,atual:'R$4.800',color:'#3B82F6'},
-  ];
-  const metasFin=metasFinCustom.length?metasFinCustom:metasFinDefault;
   const metaEl=document.getElementById('fin-metas-fin');
-  if(metaEl)metaEl.innerHTML=metasFin.map(m=>`<div style="padding:7px 0;border-bottom:1px solid #F3F4F6">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-      <span style="font-size:16px;flex-shrink:0">${m.emoji}</span>
-      <div style="flex:1"><div style="font-size:11px;font-weight:600;color:var(--text)">${m.label}</div><div style="font-size:10px;color:var(--text3)">Meta: ${m.meta}</div></div>
-      <span style="font-size:10px;font-weight:700;color:${m.color}">${m.pct}%</span>
-      ${metasFinCustom.length?`<button onclick="deleteMetaFin('${m.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="ti ti-trash" style="font-size:12px"></i></button>`:''}
-    </div>
-    <div style="height:4px;background:#F3F4F6;border-radius:99px;overflow:hidden"><div style="height:100%;background:${m.color};border-radius:99px;width:${m.pct}%"></div></div>
-    <div style="font-size:10px;color:var(--text3);margin-top:2px;text-align:right">${m.atual}</div>
-  </div>`).join('');
+  if(metaEl){
+    if(!metasFinCustom.length){
+      metaEl.innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px 0;text-align:center">Nenhuma meta cadastrada.<br><span onclick="openModal(\'modal-meta-fin\')" style="color:var(--purple2);cursor:pointer;font-weight:600">+ Adicionar meta financeira</span></div>';
+    } else {
+      metaEl.innerHTML=metasFinCustom.map(m=>`<div style="padding:7px 0;border-bottom:1px solid #F3F4F6">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span style="font-size:16px;flex-shrink:0">${m.emoji}</span>
+          <div style="flex:1"><div style="font-size:11px;font-weight:600;color:var(--text)">${m.label}</div><div style="font-size:10px;color:var(--text3)">Meta: ${m.meta}</div></div>
+          <span style="font-size:10px;font-weight:700;color:${m.color}">${m.pct}%</span>
+          <button onclick="deleteMetaFin('${m.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="ti ti-trash" style="font-size:12px"></i></button>
+        </div>
+        <div style="height:4px;background:#F3F4F6;border-radius:99px;overflow:hidden"><div style="height:100%;background:${m.color};border-radius:99px;width:${m.pct}%"></div></div>
+        <div style="font-size:10px;color:var(--text3);margin-top:2px;text-align:right">${m.atual}</div>
+      </div>`).join('');
+    }
+  }
 
-  // Últimas receitas
-  const receitas=[
-    {icon:'💼',label:'Salário Everaldo',data:'05/06/2025',val:'R$8.500,00',color:'#10B981'},
-    {icon:'💳',label:'Salário Bianca',data:'01/06/2025',val:'R$6.000,00',color:'#10B981'},
-    {icon:'🌿',label:'ELIT3 GREEN – Vendas',data:'03/06/2025',val:'R$2.750,00',color:'#10B981'},
-    {icon:'🎁',label:'Papelaria – Vendas',data:'01/06/2025',val:'R$1.980,00',color:'#10B981'},
-    {icon:'📈',label:'Rendimento investimento',data:'01/06/2025',val:'R$520,00',color:'#10B981'},
-  ];
+  // Últimas receitas (reais, do localStorage)
+  const receitasReais=fins.filter(f=>f.tipo==='receita').slice(0,8);
+  const recTotalGeral=fins.filter(f=>f.tipo==='receita').reduce((a,b)=>a+(b.valor||0),0);
   const recEl=document.getElementById('fin-receitas-list');
-  if(recEl)recEl.innerHTML=receitas.map(r=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #F3F4F6">
-    <span style="font-size:16px;flex-shrink:0">${r.icon}</span>
-    <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--text)">${r.label}</div><div style="font-size:10px;color:var(--text3)">${r.data}</div></div>
-    <div style="font-size:12px;font-weight:700;color:#10B981">${r.val}</div>
-  </div>`).join('');
+  if(recEl){
+    recEl.innerHTML=receitasReais.length
+      ? receitasReais.map(r=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #F3F4F6">
+          <div style="width:32px;height:32px;border-radius:8px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-trending-up" style="color:#10B981;font-size:14px"></i></div>
+          <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--text)">${r.desc}</div><div style="font-size:10px;color:var(--text3)">${r.cat||''}${r.data?' · '+new Date(r.data+'T12:00').toLocaleDateString('pt-BR'):''}</div></div>
+          <div style="font-size:12px;font-weight:700;color:#10B981">${fmtR(r.valor||0)}</div>
+          <button onclick="deleteFin('${r.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="ti ti-trash" style="font-size:12px"></i></button>
+        </div>`)
+        .join('')
+      : '<div style="font-size:12px;color:var(--text3);padding:12px 0;text-align:center">Nenhuma receita lançada ainda.</div>';
+  }
+  const recTotalLabel=document.getElementById('fin-rec-total-label');
+  if(recTotalLabel)recTotalLabel.textContent=fmtR(recTotalGeral);
 
-  // Últimas despesas
-  const despesas=[
-    {icon:'🛒',label:'Supermercado',data:'11/06/2025',val:'R$456,80'},
-    {icon:'⛽',label:'Combustível',data:'10/06/2025',val:'R$180,00'},
-    {icon:'💊',label:'Farmácia',data:'09/06/2025',val:'R$89,90'},
-    {icon:'🎒',label:'Escola Esmeralda',data:'10/06/2025',val:'R$1.250,00'},
-    {icon:'🎒',label:'Escola Rodolfo',data:'10/06/2025',val:'R$1.250,00'},
-  ];
+  // Últimas despesas (reais)
+  const despesasReais=fins.filter(f=>f.tipo==='despesa').slice(0,8);
+  const despTotalGeral=fins.filter(f=>f.tipo==='despesa').reduce((a,b)=>a+(b.valor||0),0);
   const despEl=document.getElementById('fin-despesas-list');
-  if(despEl)despEl.innerHTML=despesas.map(d=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #F3F4F6">
-    <span style="font-size:16px;flex-shrink:0">${d.icon}</span>
-    <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--text)">${d.label}</div><div style="font-size:10px;color:var(--text3)">${d.data}</div></div>
-    <div style="font-size:12px;font-weight:700;color:#EF4444">${d.val}</div>
-  </div>`).join('');
+  if(despEl){
+    despEl.innerHTML=despesasReais.length
+      ? despesasReais.map(d=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #F3F4F6">
+          <div style="width:32px;height:32px;border-radius:8px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-trending-down" style="color:#EF4444;font-size:14px"></i></div>
+          <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--text)">${d.desc}</div><div style="font-size:10px;color:var(--text3)">${d.cat||''}${d.data?' · '+new Date(d.data+'T12:00').toLocaleDateString('pt-BR'):''}</div></div>
+          <div style="font-size:12px;font-weight:700;color:#EF4444">${fmtR(d.valor||0)}</div>
+          <button onclick="deleteFin('${d.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="ti ti-trash" style="font-size:12px"></i></button>
+        </div>`)
+        .join('')
+      : '<div style="font-size:12px;color:var(--text3);padding:12px 0;text-align:center">Nenhuma despesa lançada ainda.</div>';
+  }
+  const despTotalLabel=document.getElementById('fin-desp-total-label');
+  if(despTotalLabel)despTotalLabel.textContent=fmtR(despTotalGeral);
 
-  // Planejamento
-  const planos=[
-    {label:'Orçamento para despesas',meta:'R$20.000,00',gasto:'R$16.209,25',pct:81,color:'#EC4899'},
-    {label:'Orçamento para investimentos',meta:'R$5.000,00',gasto:'R$3.500,00',pct:70,color:'#8B5CF6'},
-    {label:'Orçamento para metas',meta:'R$5.000,00',gasto:'R$3.000,00',pct:60,color:'#3B82F6'},
-    {label:'Orçamento total',meta:'R$30.000,00',gasto:'R$22.709,25',pct:76,color:'var(--purple2)'},
-  ];
-  const planEl=document.getElementById('fin-planejamento');
-  if(planEl)planEl.innerHTML=planos.map(p=>`<div style="margin-bottom:12px">
-    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="color:var(--text2)">${p.label}</span><span style="font-weight:600;color:var(--text)">${p.meta}</span></div>
-    <div style="height:6px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-bottom:3px"><div style="height:100%;background:${p.color};border-radius:99px;width:${p.pct}%"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:10px"><span style="color:var(--text3)">${p.gasto}</span><span style="font-weight:700;color:${p.color}">${p.pct}%</span></div>
-  </div>`).join('');
+  // Todos os lançamentos (filtráveis + deletáveis)
+  const filterTipo=document.getElementById('fin-filter-tipo');
+  const filterCat=document.getElementById('fin-filter-cat');
+  const tipoVal=filterTipo?filterTipo.value:'';
+  const catVal=filterCat?filterCat.value:'';
+  // Popular filtro de categorias
+  if(filterCat){
+    const allCats=[...new Set(fins.map(f=>f.cat||'Outros'))].sort();
+    const prev=filterCat.value;
+    filterCat.innerHTML='<option value="">Todas categorias</option>'+allCats.map(c=>`<option value="${c}">${c}</option>`).join('');
+    filterCat.value=prev;
+  }
+  const finsFiltrados=fins.filter(f=>{
+    if(tipoVal && f.tipo!==tipoVal)return false;
+    if(catVal && (f.cat||'Outros')!==catVal)return false;
+    return true;
+  });
+  const todosEl=document.getElementById('fin-todos-lancamentos');
+  if(todosEl){
+    todosEl.innerHTML=finsFiltrados.length
+      ? finsFiltrados.map(f=>`<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #F3F4F6">
+          <div style="width:8px;height:8px;border-radius:50%;background:${f.tipo==='receita'?'#10B981':'#EF4444'};flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="font-size:12px;font-weight:600;color:var(--text)">${f.desc}</div>
+            <div style="font-size:10px;color:var(--text3)">${f.cat||''}${f.data?' · '+new Date(f.data+'T12:00').toLocaleDateString('pt-BR'):''}</div>
+          </div>
+          <div style="font-size:12px;font-weight:700;color:${f.tipo==='receita'?'#10B981':'#EF4444'}">${fmtR(f.valor||0)}</div>
+          <button onclick="deleteFin('${f.id}')" title="Excluir" style="background:none;border:none;color:var(--text3);cursor:pointer;padding:4px"><i class="ti ti-trash" style="font-size:13px"></i></button>
+        </div>`)
+        .join('')
+      : '<div style="font-size:12px;color:var(--text3);padding:16px 0;text-align:center"><i class="ti ti-currency-dollar" style="font-size:28px;display:block;margin-bottom:8px;opacity:.2"></i>Nenhum lançamento ainda.<br>Use "Novo Lançamento" para começar.</div>';
+  }
 
-  // Draw donut for full fin page
-  const canvas=document.getElementById('donut-fin-full');
-  if(canvas){
-    const ctx=canvas.getContext('2d');
-    ctx.clearRect(0,0,130,130);
-    const data=[{v:18500,c:'#10B981'},{v:6000,c:'#EC4899'},{v:2250,c:'#F59E0B'},{v:2000,c:'#8B5CF6'}];
-    const total=28750;let start=-Math.PI/2;const cx=65,cy=65,r=58,inner=38;
-    data.forEach(d=>{const angle=(d.v/total)*Math.PI*2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,start,start+angle);ctx.closePath();ctx.fillStyle=d.c;ctx.fill();start+=angle;});
-    ctx.beginPath();ctx.arc(cx,cy,inner,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+  // Dicas dinâmicas baseadas nos dados reais
+  const dicasEl=document.getElementById('fin-dicas');
+  if(dicasEl){
+    const dicas=[];
+    if(fins.length===0){
+      dicas.push({bg:'#EDE9FE',iconBg:'#8B5CF620',icon:'ti-sparkles',iconColor:'#8B5CF6',textColor:'#4C1D95',titulo:'Comece agora!',msg:'Use o botão "Novo Lançamento" para registrar suas receitas e despesas. Os resumos serão calculados automaticamente.'});
+    } else {
+      if(econPct>=30)dicas.push({bg:'#ECFDF5',iconBg:'#10B98120',icon:'ti-mood-happy',iconColor:'#10B981',textColor:'#065F46',titulo:'Você está economizando!',msg:`Sua economia este mês é de ${econPct}% da receita. Continue assim! 💚`});
+      else if(rec>0&&econPct<0)dicas.push({bg:'#FEF2F2',iconBg:'#EF444420',icon:'ti-alert-triangle',iconColor:'#EF4444',textColor:'#7F1D1D',titulo:'Atenção: déficit no mês',msg:`Suas despesas (${fmtR(desp)}) estão maiores que as receitas (${fmtR(rec)}). Reveja seus gastos.`});
+      else if(rec>0)dicas.push({bg:'#FFF7ED',iconBg:'#F59E0B20',icon:'ti-eye',iconColor:'#F59E0B',textColor:'#92400E',titulo:'Fique de olho!',msg:`Você está guardando ${econPct}% da renda. Tente chegar a pelo menos 20%.`});
+      const catMaisGasto=Object.entries(despByCat).sort((a,b)=>b[1]-a[1])[0];
+      if(catMaisGasto)dicas.push({bg:'#EFF6FF',iconBg:'#3B82F620',icon:'ti-chart-bar',iconColor:'#3B82F6',textColor:'#1E3A5F',titulo:`Maior gasto: ${catMaisGasto[0]}`,msg:`${fmtR(catMaisGasto[1])} neste mês — ${desp>0?Math.round(catMaisGasto[1]/desp*100):0}% do total de despesas.`});
+      if(!contasFixasCustom.length)dicas.push({bg:'#F0FDF4',iconBg:'#10B98120',icon:'ti-receipt',iconColor:'#10B981',textColor:'#065F46',titulo:'Cadastre suas contas fixas',msg:'Registre aluguel, energia, água, escola e outras contas mensais para acompanhar o que já está comprometido.'});
+    }
+    dicasEl.innerHTML=dicas.map(d=>`<div style="background:${d.bg};border-radius:10px;padding:10px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start">
+      <div style="width:28px;height:28px;border-radius:8px;background:${d.iconBg};display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ${d.icon}" style="color:${d.iconColor};font-size:14px"></i></div>
+      <div style="font-size:11.5px;color:${d.textColor};line-height:1.5"><strong>${d.titulo}</strong><br>${d.msg}</div>
+    </div>`).join('');
   }
 }
 
