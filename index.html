@@ -1658,79 +1658,51 @@ select.inp{cursor:pointer}
         <div class="card" style="margin-bottom:16px">
           <div class="card-header">
             <div class="card-title"><i class="ti ti-calendar-event" style="color:#EC4899"></i>Próximos compromissos da família</div>
-            <span class="card-link" onclick="nav('calendario')">Ver calendário</span>
+            <button class="btn" onclick="openModal('modal-fam-comp')" style="padding:5px 12px;font-size:11px"><i class="ti ti-plus"></i>Adicionar</button>
           </div>
-          <div id="fam-compromissos">
-            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #F3F4F6">
-              <div style="text-align:center;min-width:40px"><div style="font-size:16px;font-weight:900;color:#EC4899">15</div><div style="font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase">JUN</div></div>
-              <div style="flex:1"><div style="font-size:12.5px;font-weight:600;color:var(--text)">Reunião de pais e mestres (Esmeralda)</div><div style="font-size:11px;color:var(--text3)">19h00 · Escola Arco-Íris</div></div>
-              <span style="font-size:10px;font-weight:600;background:#8B5CF620;color:#8B5CF6;padding:3px 9px;border-radius:99px">Escola</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #F3F4F6">
-              <div style="text-align:center;min-width:40px"><div style="font-size:16px;font-weight:900;color:#10B981">18</div><div style="font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase">JUN</div></div>
-              <div style="flex:1"><div style="font-size:12.5px;font-weight:600;color:var(--text)">Consulta pediátrica (Rodolfo)</div><div style="font-size:11px;color:var(--text3)">16h00 · Clínica Infantil</div></div>
-              <span style="font-size:10px;font-weight:600;background:#10B98120;color:#10B981;padding:3px 9px;border-radius:99px">Saúde</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #F3F4F6">
-              <div style="text-align:center;min-width:40px"><div style="font-size:16px;font-weight:900;color:#F59E0B">21</div><div style="font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase">JUN</div></div>
-              <div style="flex:1"><div style="font-size:12.5px;font-weight:600;color:var(--text)">Passeio em família</div><div style="font-size:11px;color:var(--text3)">Parque Ecológico</div></div>
-              <span style="font-size:10px;font-weight:600;background:#F59E0B20;color:#F59E0B;padding:3px 9px;border-radius:99px">Lazer</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #F3F4F6">
-              <div style="text-align:center;min-width:40px"><div style="font-size:16px;font-weight:900;color:#EC4899">30</div><div style="font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase">JUN</div></div>
-              <div style="flex:1"><div style="font-size:12.5px;font-weight:600;color:var(--text)">Aniversário de Everaldo 🎂</div><div style="font-size:11px;color:var(--text3)"></div></div>
-              <span style="font-size:10px;font-weight:600;background:#EC489920;color:#EC4899;padding:3px 9px;border-radius:99px">Aniversário</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #F3F4F6">
-              <div style="text-align:center;min-width:40px"><div style="font-size:16px;font-weight:900;color:#8B5CF6">05</div><div style="font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase">JUL</div></div>
-              <div style="flex:1"><div style="font-size:12.5px;font-weight:600;color:var(--text)">Festa junina da escola (Esmeralda)</div><div style="font-size:11px;color:var(--text3)">14h00 · Escola Arco-Íris</div></div>
-              <span style="font-size:10px;font-weight:600;background:#8B5CF620;color:#8B5CF6;padding:3px 9px;border-radius:99px">Escola</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;padding:10px 0">
-              <div style="text-align:center;min-width:40px"><div style="font-size:16px;font-weight:900;color:#EC4899">12</div><div style="font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase">JUL</div></div>
-              <div style="flex:1"><div style="font-size:12.5px;font-weight:600;color:var(--text)">Aniversário de Esmeralda 🎂</div></div>
-              <span style="font-size:10px;font-weight:600;background:#EC489920;color:#EC4899;padding:3px 9px;border-radius:99px">Aniversário</span>
-            </div>
-          </div>
-          <div style="text-align:center;margin-top:12px"><span class="card-link" onclick="nav('calendario')">Ver todos os compromissos &rsaquo;</span></div>
+          <div id="fam-compromissos"></div>
+          <div style="text-align:center;margin-top:10px"><span class="card-link" onclick="nav('calendario')">Ver todos no calendário &rsaquo;</span></div>
         </div>
 
         <!-- CRIANÇAS -->
         <div class="card" style="margin-bottom:16px">
           <div class="card-header">
             <div class="card-title"><i class="ti ti-friends" style="color:#8B5CF6"></i>Crianças</div>
-            <span class="card-link">Ver tudo das crianças</span>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
             <!-- Esmeralda -->
             <div style="background:#F9F8FF;border-radius:12px;padding:14px">
-              <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
                 <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#A78BFA);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px">E</div>
-                <div style="font-size:13px;font-weight:700;color:var(--text)">Esmeralda</div>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:var(--text)">Esmeralda</div>
+                  <div style="font-size:10px;color:var(--text3)">Resp.: Bianca e Everaldo</div>
+                </div>
               </div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
-                <div style="text-align:center;font-size:10px;color:var(--text3)"><i class="ti ti-school" style="font-size:18px;color:#8B5CF6;display:block;margin-bottom:2px"></i>Escola</div>
-                <div style="text-align:center;font-size:10px;color:var(--text3)"><i class="ti ti-run" style="font-size:18px;color:#EC4899;display:block;margin-bottom:2px"></i>Atividades</div>
-                <div style="text-align:center;font-size:10px;color:var(--text3)"><i class="ti ti-books" style="font-size:18px;color:#3B82F6;display:block;margin-bottom:2px"></i>Material</div>
-                <div style="text-align:center;font-size:10px;color:var(--text3)"><i class="ti ti-heart" style="font-size:18px;color:#EF4444;display:block;margin-bottom:2px"></i>Saúde</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">
+                <div style="background:#EDE9FE;border-radius:8px;padding:8px;text-align:center"><i class="ti ti-school" style="font-size:16px;color:#8B5CF6;display:block;margin-bottom:2px"></i><span style="font-size:10px;color:#8B5CF6;font-weight:600">Escola</span></div>
+                <div style="background:#EDE9FE;border-radius:8px;padding:8px;text-align:center"><i class="ti ti-run" style="font-size:16px;color:#EC4899;display:block;margin-bottom:2px"></i><span style="font-size:10px;color:#EC4899;font-weight:600">Atividades</span></div>
+                <div style="background:#EDE9FE;border-radius:8px;padding:8px;text-align:center"><i class="ti ti-books" style="font-size:16px;color:#3B82F6;display:block;margin-bottom:2px"></i><span style="font-size:10px;color:#3B82F6;font-weight:600">Material</span></div>
+                <div style="background:#EDE9FE;border-radius:8px;padding:8px;text-align:center"><i class="ti ti-heart" style="font-size:16px;color:#EF4444;display:block;margin-bottom:2px"></i><span style="font-size:10px;color:#EF4444;font-weight:600">Saúde</span></div>
               </div>
-              <div style="font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px;margin-bottom:4px"><i class="ti ti-info-circle" style="font-size:12px"></i>Resp.: Bianca</div>
-              <div style="font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px"><i class="ti ti-calendar" style="font-size:12px"></i>18/06 · Reunião de pais e mestres</div>
+              <div id="esmeralda-prox-comp" style="font-size:10.5px;color:var(--text3)">Carregando compromissos...</div>
             </div>
             <!-- Rodolfo -->
             <div style="background:#F0FDF4;border-radius:12px;padding:14px">
-              <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
                 <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#10B981,#34D399);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px">R</div>
-                <div style="font-size:13px;font-weight:700;color:var(--text)">Rodolfo</div>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:var(--text)">Rodolfo</div>
+                  <div style="font-size:10px;color:var(--text3)">Resp.: Bianca e Everaldo</div>
+                </div>
               </div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
-                <div style="text-align:center;font-size:10px;color:var(--text3)"><i class="ti ti-school" style="font-size:18px;color:#10B981;display:block;margin-bottom:2px"></i>Escola</div>
-                <div style="text-align:center;font-size:10px;color:var(--text3)"><i class="ti ti-run" style="font-size:18px;color:#F59E0B;display:block;margin-bottom:2px"></i>Atividades</div>
-                <div style="text-align:center;font-size:10px;color:var(--text3)"><i class="ti ti-books" style="font-size:18px;color:#3B82F6;display:block;margin-bottom:2px"></i>Material</div>
-                <div style="text-align:center;font-size:10px;color:var(--text3)"><i class="ti ti-heart" style="font-size:18px;color:#EF4444;display:block;margin-bottom:2px"></i>Saúde</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">
+                <div style="background:#DCFCE7;border-radius:8px;padding:8px;text-align:center"><i class="ti ti-school" style="font-size:16px;color:#10B981;display:block;margin-bottom:2px"></i><span style="font-size:10px;color:#10B981;font-weight:600">Escola</span></div>
+                <div style="background:#DCFCE7;border-radius:8px;padding:8px;text-align:center"><i class="ti ti-run" style="font-size:16px;color:#F59E0B;display:block;margin-bottom:2px"></i><span style="font-size:10px;color:#F59E0B;font-weight:600">Atividades</span></div>
+                <div style="background:#DCFCE7;border-radius:8px;padding:8px;text-align:center"><i class="ti ti-books" style="font-size:16px;color:#3B82F6;display:block;margin-bottom:2px"></i><span style="font-size:10px;color:#3B82F6;font-weight:600">Material</span></div>
+                <div style="background:#DCFCE7;border-radius:8px;padding:8px;text-align:center"><i class="ti ti-heart" style="font-size:16px;color:#EF4444;display:block;margin-bottom:2px"></i><span style="font-size:10px;color:#EF4444;font-weight:600">Saúde</span></div>
               </div>
-              <div style="font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px;margin-bottom:4px"><i class="ti ti-info-circle" style="font-size:12px"></i>Resp.: Bianca</div>
-              <div style="font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px"><i class="ti ti-calendar" style="font-size:12px"></i>18/06 · Consulta pediátrica</div>
+              <div id="rodolfo-prox-comp" style="font-size:10.5px;color:var(--text3)">Carregando compromissos...</div>
             </div>
           </div>
         </div>
@@ -1738,18 +1710,14 @@ select.inp{cursor:pointer}
         <!-- METAS + MEMÓRIAS -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
           <div class="card">
-            <div class="card-header"><div class="card-title"><i class="ti ti-target" style="color:#EC4899"></i>Metas da família</div><span class="card-link">Ver todas as metas</span></div>
-            <div>
-              <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--text)">Alimentação saudável</span><span style="color:#10B981;font-weight:700">80%</span></div><div class="prog-bar"><div class="prog-fill" style="width:80%;background:#10B981"></div></div></div>
-              <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--text)">Passeio mensal</span><span style="color:#8B5CF6;font-weight:700">60%</span></div><div class="prog-bar"><div class="prog-fill" style="width:60%;background:#8B5CF6"></div></div></div>
-              <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--text)">Reserva de emergência</span><span style="color:#3B82F6;font-weight:700">65%</span></div><div class="prog-bar"><div class="prog-fill" style="width:65%;background:#3B82F6"></div></div></div>
-              <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--text)">Casa organizada</span><span style="color:#2DD4BF;font-weight:700">70%</span></div><div class="prog-bar"><div class="prog-fill" style="width:70%;background:#2DD4BF"></div></div></div>
-              <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--text)">Mais tempo em família</span><span style="color:#F59E0B;font-weight:700">75%</span></div><div class="prog-bar"><div class="prog-fill" style="width:75%;background:#F59E0B"></div></div></div>
-              <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--text)">Viagem em família</span><span style="color:#EC4899;font-weight:700">30%</span></div><div class="prog-bar"><div class="prog-fill" style="width:30%;background:#EC4899"></div></div></div>
+            <div class="card-header">
+              <div class="card-title"><i class="ti ti-target" style="color:#EC4899"></i>Metas da família</div>
+              <button onclick="openModal('modal-fam-meta')" style="background:none;border:none;color:var(--purple2);font-size:11px;font-weight:600;cursor:pointer">+ Adicionar</button>
             </div>
+            <div id="fam-metas-list"></div>
           </div>
           <div class="card">
-            <div class="card-header"><div class="card-title"><i class="ti ti-photo" style="color:#EC4899"></i>Memórias da família</div><span class="card-link" onclick="nav('memorias')">Ver todas as memórias</span></div>
+            <div class="card-header"><div class="card-title"><i class="ti ti-photo" style="color:#EC4899"></i>Memórias da família</div><span class="card-link" onclick="nav('memorias')">Ver todas →</span></div>
             <div id="fam-mem" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"></div>
             <button class="btn-ghost" onclick="openModal('modal-memoria')" style="width:100%;justify-content:center;display:flex;margin-top:10px"><i class="ti ti-plus"></i>Adicionar memória</button>
           </div>
@@ -2038,65 +2006,52 @@ select.inp{cursor:pointer}
     </div>
 
     <!-- ÁREAS DA VIDA -->
-    <div class="card" style="margin-bottom:16px">
+    <div class="card" style="margin-bottom:16px" id="rel-areas-card">
       <div class="card-header"><div class="card-title"><i class="ti ti-chart-bar" style="color:var(--purple2)"></i>Resumo por área da vida</div></div>
-      <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:10px;align-items:end">
-        ${[{l:'Saúde',v:85,c:'#EC4899'},{l:'Finanças',v:90,c:'#10B981'},{l:'Projetos',v:80,c:'#8B5CF6'},{l:'Crescimento',v:88,c:'#F59E0B'},{l:'Casa',v:82,c:'#2DD4BF'},{l:'Alimentação',v:75,c:'#F472B6'},{l:'Pets',v:92,c:'#EC4899'},{l:'Relacionamentos',v:85,c:'#818CF8'}].map(a=>`
-          <div style="text-align:center">
-            <div style="height:80px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:6px">
-              <div style="width:28px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,${a.c},${a.c}80);height:${a.v}%"></div>
-            </div>
-            <div style="font-size:10px;font-weight:700;color:var(--text)">${a.l}</div>
-            <div style="font-size:11px;font-weight:800;color:${a.c}">${a.v}%</div>
-          </div>`).join('')}
-      </div>
+      <div id="rel-areas-content" style="display:grid;grid-template-columns:repeat(8,1fr);gap:10px;align-items:end"></div>
     </div>
 
     <!-- EVOLUÇÃO + DISTRIBUIÇÃO -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
       <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-chart-line" style="color:var(--purple2)"></i>Evolução mensal</div><select class="inp" style="width:auto;font-size:10px;padding:3px 8px"><option>Últimos 6 meses</option></select></div>
+        <div class="card-header"><div class="card-title"><i class="ti ti-chart-line" style="color:var(--purple2)"></i>Evolução mensal</div></div>
         <div style="display:flex;gap:12px;margin-bottom:8px">
           <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text2)"><div style="width:16px;height:2px;background:#EC4899;border-radius:2px"></div>Produtividade</div>
           <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text2)"><div style="width:16px;height:2px;background:#10B981;border-radius:2px"></div>Hábitos</div>
           <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text2)"><div style="width:16px;height:2px;background:#8B5CF6;border-radius:2px"></div>Bem-estar</div>
         </div>
-        <div style="position:relative;height:120px">
-          <svg width="100%" height="120" viewBox="0 0 300 100" preserveAspectRatio="none">
+        <div style="position:relative;height:100px">
+          <svg width="100%" height="100" viewBox="0 0 300 100" preserveAspectRatio="none">
             <polyline points="0,60 60,55 120,50 180,42 240,38 300,30" fill="none" stroke="#EC4899" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             <polyline points="0,70 60,65 120,60 180,55 240,50 300,42" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             <polyline points="0,75 60,70 120,68 180,62 240,58 300,50" fill="none" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="0" cy="60" r="3" fill="#EC4899"/><circle cx="300" cy="30" r="3" fill="#EC4899"/>
-            <circle cx="0" cy="70" r="3" fill="#10B981"/><circle cx="300" cy="42" r="3" fill="#10B981"/>
-            <circle cx="0" cy="75" r="3" fill="#8B5CF6"/><circle cx="300" cy="50" r="3" fill="#8B5CF6"/>
-            <text x="0" y="115" fill="#9CA3AF" font-size="9" font-family="Inter">Dez</text>
-            <text x="50" y="115" fill="#9CA3AF" font-size="9" font-family="Inter">Jan</text>
-            <text x="106" y="115" fill="#9CA3AF" font-size="9" font-family="Inter">Fev</text>
-            <text x="160" y="115" fill="#9CA3AF" font-size="9" font-family="Inter">Mar</text>
-            <text x="214" y="115" fill="#9CA3AF" font-size="9" font-family="Inter">Abr</text>
-            <text x="268" y="115" fill="#9CA3AF" font-size="9" font-family="Inter">Mai</text>
           </svg>
+          <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-top:2px;padding:0 4px">
+            <span>Jan</span><span>Fev</span><span>Mar</span><span>Abr</span><span>Mai</span><span>Jun</span>
+          </div>
         </div>
       </div>
       <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-chart-donut" style="color:#EC4899"></i>Distribuição de foco</div><select class="inp" style="width:auto;font-size:10px;padding:3px 8px"><option>Maio / 2025</option></select></div>
+        <div class="card-header"><div class="card-title"><i class="ti ti-chart-donut" style="color:#EC4899"></i>Distribuição de foco</div></div>
         <div style="display:flex;align-items:center;gap:16px">
           <div style="position:relative;width:110px;height:110px;flex-shrink:0">
             <svg viewBox="0 0 110 110" width="110" height="110">
-              <circle cx="55" cy="55" r="45" fill="none" stroke="#EC4899" stroke-width="16" stroke-dasharray="16.96 89.54" stroke-dashoffset="0"/>
-              <circle cx="55" cy="55" r="45" fill="none" stroke="#10B981" stroke-width="16" stroke-dasharray="19.17 87.33" stroke-dashoffset="-16.96"/>
-              <circle cx="55" cy="55" r="45" fill="none" stroke="#8B5CF6" stroke-width="16" stroke-dasharray="21.39 85.11" stroke-dashoffset="-36.13"/>
-              <circle cx="55" cy="55" r="45" fill="none" stroke="#F59E0B" stroke-width="16" stroke-dasharray="19.17 87.33" stroke-dashoffset="-57.52"/>
-              <circle cx="55" cy="55" r="45" fill="none" stroke="#2DD4BF" stroke-width="16" stroke-dasharray="12.74 93.76" stroke-dashoffset="-76.69"/>
-              <circle cx="55" cy="55" r="45" fill="none" stroke="#F472B6" stroke-width="16" stroke-dasharray="8.48 97.52" stroke-dashoffset="-89.43"/>
-              <circle cx="55" cy="55" r="45" fill="none" stroke="#818CF8" stroke-width="16" stroke-dasharray="8.48 97.52" stroke-dashoffset="-97.91"/>
+              <circle cx="55" cy="55" r="45" fill="none" stroke="#EC4899" stroke-width="16" stroke-dasharray="28.3 254.2" stroke-dashoffset="0"/>
+              <circle cx="55" cy="55" r="45" fill="none" stroke="#10B981" stroke-width="16" stroke-dasharray="56.5 225.9" stroke-dashoffset="-28.3"/>
+              <circle cx="55" cy="55" r="45" fill="none" stroke="#8B5CF6" stroke-width="16" stroke-dasharray="70.7 211.8" stroke-dashoffset="-84.8"/>
+              <circle cx="55" cy="55" r="45" fill="none" stroke="#F59E0B" stroke-width="16" stroke-dasharray="56.5 225.9" stroke-dashoffset="-155.5"/>
+              <circle cx="55" cy="55" r="45" fill="none" stroke="#2DD4BF" stroke-width="16" stroke-dasharray="70.7 211.8" stroke-dashoffset="-212"/>
               <circle cx="55" cy="55" r="30" fill="#fff"/>
-              <text x="55" y="52" text-anchor="middle" fill="var(--text)" font-size="9" font-weight="700" font-family="Inter">Total</text>
+              <text x="55" y="52" text-anchor="middle" fill="var(--text)" font-size="9" font-weight="700" font-family="Inter">Foco</text>
               <text x="55" y="63" text-anchor="middle" fill="var(--text)" font-size="10" font-weight="900" font-family="Inter">100%</text>
             </svg>
           </div>
-          <div style="flex:1;display:flex;flex-direction:column;gap:5px">
-            ${[['Saúde','#EC4899','16%'],['Finanças','#10B981','18%'],['Projetos','#8B5CF6','20%'],['Crescimento','#F59E0B','18%'],['Casa','#2DD4BF','12%'],['Alimentação','#F472B6','8%'],['Pets','#818CF8','8%']].map(([l,c,v])=>`<div style="display:flex;align-items:center;justify-content:space-between;font-size:11px"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:${c};display:inline-block"></span>${l}</span><span style="font-weight:700;color:${c}">${v}</span></div>`).join('')}
+          <div style="flex:1;display:flex;flex-direction:column;gap:5px" id="rel-foco-dist">
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:#EC4899;display:inline-block"></span>Saúde</span><span style="font-weight:700;color:#EC4899">10%</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:#10B981;display:inline-block"></span>Finanças</span><span style="font-weight:700;color:#10B981">20%</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:#8B5CF6;display:inline-block"></span>Projetos</span><span style="font-weight:700;color:#8B5CF6">25%</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:#F59E0B;display:inline-block"></span>Crescimento</span><span style="font-weight:700;color:#F59E0B">20%</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:#2DD4BF;display:inline-block"></span>Casa</span><span style="font-weight:700;color:#2DD4BF">25%</span></div>
           </div>
         </div>
       </div>
@@ -2218,11 +2173,10 @@ select.inp{cursor:pointer}
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
       <div style="font-size:14px;font-weight:700;color:var(--text)">Meus projetos</div>
       <div style="display:flex;gap:8px">
-        <input class="inp" placeholder="Buscar projeto..." style="width:180px;font-size:12px;padding:7px 12px">
-        <select class="inp" style="width:auto;font-size:12px;padding:7px 12px"><option>Todos os status</option><option>Em andamento</option><option>Concluído</option><option>Ideia</option></select>
+        <select class="inp" id="proj-filter-status" onchange="renderProjetosCustom()" style="width:auto;font-size:12px;padding:7px 12px"><option value="">Todos os status</option><option value="Em andamento">Em andamento</option><option value="Concluído">Concluído</option><option value="Ideia">Ideia</option><option value="Pausado">Pausado</option></select>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px" id="projetos-custom-grid"></div>
       <!-- ELIT3 GREEN -->
       <div class="card" style="border-top:3px solid #10B981">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
@@ -2239,181 +2193,6 @@ select.inp{cursor:pointer}
         <div style="font-size:10px;color:var(--text3);margin-bottom:6px">Próxima ação:</div>
         <div style="font-size:11px;color:#10B981;font-weight:600;margin-bottom:8px"><i class="ti ti-check" style="font-size:11px"></i> Lançar nova linha de produtos</div>
         <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3)"><span><i class="ti ti-calendar"></i> 20/06/2025</span><span><i class="ti ti-users"></i> 5 tarefas</span></div>
-      </div>
-      <!-- PAPELARIA VIRTUAL -->
-      <div class="card" style="border-top:3px solid #EC4899">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:32px;height:32px;border-radius:8px;background:#FDF2F8;display:flex;align-items:center;justify-content:center;font-size:16px">🛒</div>
-            <div><div style="font-size:13px;font-weight:700;color:var(--text)">Papelaria Virtual</div><span style="font-size:9.5px;background:#EC489920;color:#EC4899;padding:2px 8px;border-radius:99px;font-weight:600">Em andamento</span></div>
-          </div>
-        </div>
-        <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:10px">Loja online de papelaria com produtos criativos e personalizados para todo o Brasil.</div>
-        <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--text3)">Progresso</span><span style="font-weight:700;color:#EC4899">52%</span></div>
-        <div style="height:5px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-bottom:10px"><div style="height:100%;background:#EC4899;border-radius:99px;width:52%"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:10.5px;margin-bottom:2px"><span style="color:var(--text3)">Investido</span><span style="font-weight:600;color:var(--text)">R$4.250,00</span></div>
-        <div style="display:flex;justify-content:space-between;font-size:10.5px;margin-bottom:10px"><span style="color:var(--text3)">Retorno previsto</span><span style="font-weight:600;color:#10B981">R$15.000,00</span></div>
-        <div style="font-size:11px;color:#EC4899;font-weight:600;margin-bottom:8px"><i class="ti ti-check" style="font-size:11px"></i> Cadastrar novos produtos</div>
-        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3)"><span><i class="ti ti-calendar"></i> 15/06/2025</span><span><i class="ti ti-users"></i> 8 tarefas</span></div>
-      </div>
-      <!-- PAPELARIA FÍSICA -->
-      <div class="card" style="border-top:3px solid #F59E0B">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:32px;height:32px;border-radius:8px;background:#FFF7ED;display:flex;align-items:center;justify-content:center;font-size:16px">🏪</div>
-            <div><div style="font-size:13px;font-weight:700;color:var(--text)">Papelaria Física</div><span style="font-size:9.5px;background:#F59E0B20;color:#F59E0B;padding:2px 8px;border-radius:99px;font-weight:600">Em andamento</span></div>
-          </div>
-        </div>
-        <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:10px">Loja física de papelaria para atendimento local com produtos e serviços personalizados.</div>
-        <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--text3)">Progresso</span><span style="font-weight:700;color:#F59E0B">35%</span></div>
-        <div style="height:5px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-bottom:10px"><div style="height:100%;background:#F59E0B;border-radius:99px;width:35%"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:10.5px;margin-bottom:2px"><span style="color:var(--text3)">Investido</span><span style="font-weight:600;color:var(--text)">R$3.000,00</span></div>
-        <div style="display:flex;justify-content:space-between;font-size:10.5px;margin-bottom:10px"><span style="color:var(--text3)">Retorno previsto</span><span style="font-weight:600;color:#10B981">R$9.800,00</span></div>
-        <div style="font-size:11px;color:#F59E0B;font-weight:600;margin-bottom:8px"><i class="ti ti-check" style="font-size:11px"></i> Definir layout da loja</div>
-        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3)"><span><i class="ti ti-calendar"></i> 30/07/2025</span><span><i class="ti ti-users"></i> 6 tarefas</span></div>
-      </div>
-      <!-- INVESTIMENTOS -->
-      <div class="card" style="border-top:3px solid #8B5CF6">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:32px;height:32px;border-radius:8px;background:#EDE9FE;display:flex;align-items:center;justify-content:center;font-size:16px">📈</div>
-            <div><div style="font-size:13px;font-weight:700;color:var(--text)">Investimentos Pessoais</div><span style="font-size:9.5px;background:#8B5CF620;color:#8B5CF6;padding:2px 8px;border-radius:99px;font-weight:600">Em andamento</span></div>
-          </div>
-        </div>
-        <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:10px">Construir patrimônio e liberdade financeira através de investimentos inteligentes.</div>
-        <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--text3)">Progresso</span><span style="font-weight:700;color:#8B5CF6">40%</span></div>
-        <div style="height:5px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-bottom:10px"><div style="height:100%;background:#8B5CF6;border-radius:99px;width:40%"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:10.5px;margin-bottom:2px"><span style="color:var(--text3)">Investido</span><span style="font-weight:600;color:var(--text)">R$5.000,00</span></div>
-        <div style="display:flex;justify-content:space-between;font-size:10.5px;margin-bottom:10px"><span style="color:var(--text3)">Retorno previsto</span><span style="font-weight:600;color:#10B981">R$11.500,00</span></div>
-        <div style="font-size:11px;color:#8B5CF6;font-weight:600;margin-bottom:8px"><i class="ti ti-check" style="font-size:11px"></i> Estudar novas oportunidades</div>
-        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3)"><span><i class="ti ti-calendar"></i> 10/07/2025</span><span><i class="ti ti-users"></i> 4 tarefas</span></div>
-      </div>
-    </div>
-
-    <!-- IDEIAS (linha 2) -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px">
-      <div class="card" style="border-top:3px solid #06B6D4;opacity:.85">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="width:32px;height:32px;border-radius:8px;background:#F0FEFF;display:flex;align-items:center;justify-content:center;font-size:16px">🎓</div><div><div style="font-size:13px;font-weight:700">Curso Online</div><span style="font-size:9.5px;background:#06B6D420;color:#06B6D4;padding:2px 8px;border-radius:99px;font-weight:600">Ideia</span></div></div>
-        <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:10px">Criar um curso online sobre organização e rotina para mulheres empreendedoras.</div>
-        <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--text3)">Progresso</span><span style="font-weight:700;color:#06B6D4">13%</span></div>
-        <div style="height:5px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-bottom:8px"><div style="height:100%;background:#06B6D4;border-radius:99px;width:13%"></div></div>
-        <div style="font-size:11px;color:#06B6D4;font-weight:600">Pesquisar plataformas</div>
-        <div style="font-size:10px;color:var(--text3);margin-top:6px"><i class="ti ti-calendar"></i> Sem prazo &nbsp; <i class="ti ti-users"></i> 2 tarefas</div>
-      </div>
-      <div class="card" style="border-top:3px solid var(--purple2);opacity:.85">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="width:32px;height:32px;border-radius:8px;background:#EDE9FE;display:flex;align-items:center;justify-content:center;font-size:16px">👩‍👩‍👧</div><div><div style="font-size:13px;font-weight:700">Comunidade Feminina</div><span style="font-size:9.5px;background:#8B5CF620;color:#8B5CF6;padding:2px 8px;border-radius:99px;font-weight:600">Planejamento</span></div></div>
-        <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:10px">Criar uma comunidade de apoio e crescimento para mulheres que empreendem.</div>
-        <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--text3)">Progresso</span><span style="font-weight:700;color:var(--purple2)">15%</span></div>
-        <div style="height:5px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-bottom:8px"><div style="height:100%;background:var(--purple2);border-radius:99px;width:15%"></div></div>
-        <div style="font-size:11px;color:var(--purple2);font-weight:600">Definir proposta de valor</div>
-        <div style="font-size:10px;color:var(--text3);margin-top:6px"><i class="ti ti-calendar"></i> Sem prazo &nbsp; <i class="ti ti-users"></i> 3 tarefas</div>
-      </div>
-      <div class="card" style="border-top:3px solid #F59E0B;opacity:.85">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="width:32px;height:32px;border-radius:8px;background:#FFF7ED;display:flex;align-items:center;justify-content:center;font-size:16px">🏠</div><div><div style="font-size:13px;font-weight:700">Imobiliário</div><span style="font-size:9.5px;background:#F59E0B20;color:#F59E0B;padding:2px 8px;border-radius:99px;font-weight:600">Ideia</span></div></div>
-        <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:10px">Investir em imóveis para geração de renda e construção de patrimônio.</div>
-        <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--text3)">Progresso</span><span style="font-weight:700;color:#F59E0B">5%</span></div>
-        <div style="height:5px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-bottom:8px"><div style="height:100%;background:#F59E0B;border-radius:99px;width:5%"></div></div>
-        <div style="font-size:11px;color:#F59E0B;font-weight:600">Estudar o mercado</div>
-        <div style="font-size:10px;color:var(--text3);margin-top:6px"><i class="ti ti-calendar"></i> Sem prazo &nbsp; <i class="ti ti-users"></i> 1 tarefa</div>
-      </div>
-      <!-- ADICIONAR NOVO -->
-      <div class="card" style="border:2px dashed #E5E7EB;background:#FAFAFA;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;min-height:200px" onclick="openNewProject()">
-        <div style="width:40px;height:40px;border-radius:50%;border:2px dashed #D1D5DB;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--purple2);margin-bottom:10px">+</div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Adicionar novo projeto</div>
-        <div style="font-size:11px;color:var(--text3);margin-bottom:14px">Tenha uma nova ideia? Registre e comece a planejar.</div>
-        <button class="btn-ghost" style="font-size:11px"><i class="ti ti-plus"></i>Adicionar projeto</button>
-      </div>
-    </div>
-
-    <!-- RESUMO + PRÓXIMAS AÇÕES -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
-      <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-chart-pie" style="color:var(--purple2)"></i>Resumo geral dos projetos</div><span class="card-link">Ver relatório completo</span></div>
-        <div style="display:flex;gap:16px;align-items:center">
-          <div style="position:relative;width:110px;height:110px;flex-shrink:0">
-            <svg viewBox="0 0 110 110" width="110" height="110">
-              <circle cx="55" cy="55" r="45" fill="none" stroke="#10B981" stroke-width="16" stroke-dasharray="34.74 71.76" stroke-dashoffset="0"/>
-              <circle cx="55" cy="55" r="45" fill="none" stroke="#EC4899" stroke-width="16" stroke-dasharray="24.22 82.28" stroke-dashoffset="-34.74"/>
-              <circle cx="55" cy="55" r="45" fill="none" stroke="#F59E0B" stroke-width="16" stroke-dasharray="17.01 89.49" stroke-dashoffset="-58.96"/>
-              <circle cx="55" cy="55" r="45" fill="none" stroke="#8B5CF6" stroke-width="16" stroke-dasharray="26.45 80.05" stroke-dashoffset="-75.97"/>
-              <circle cx="55" cy="55" r="30" fill="#fff"/>
-              <text x="55" y="51" text-anchor="middle" fill="var(--text2)" font-size="8" font-family="Inter">Total invest.</text>
-              <text x="55" y="63" text-anchor="middle" fill="var(--text)" font-size="9" font-weight="800" font-family="Inter">R$18.750</text>
-            </svg>
-          </div>
-          <div style="flex:1">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:11px;border-bottom:1px solid #F3F4F6"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;background:#10B981;border-radius:2px;display:inline-block"></span>ELIT3 Green</span><span>34,7% · R$6.500</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:11px;border-bottom:1px solid #F3F4F6"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;background:#EC4899;border-radius:2px;display:inline-block"></span>Papelaria Virtual</span><span>22,7% · R$4.250</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:11px;border-bottom:1px solid #F3F4F6"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;background:#F59E0B;border-radius:2px;display:inline-block"></span>Papelaria Física</span><span>16,0% · R$3.000</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:11px"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;background:#8B5CF6;border-radius:2px;display:inline-block"></span>Investimentos</span><span>26,6% · R$5.000</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-bolt" style="color:#F59E0B"></i>Próximas ações gerais</div><span class="card-link">Ver todas</span></div>
-        <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #F3F4F6">
-          <i class="ti ti-leaf" style="color:#10B981;font-size:15px;flex-shrink:0"></i>
-          <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--text)">Lançar nova linha de produtos — ELIT3</div><div style="font-size:10px;color:var(--text3)">20/06/2025</div></div>
-          <span style="font-size:9.5px;background:#ECFDF5;color:#10B981;padding:2px 7px;border-radius:99px;font-weight:600">Alta</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #F3F4F6">
-          <i class="ti ti-scissors" style="color:#EC4899;font-size:15px;flex-shrink:0"></i>
-          <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--text)">Cadastrar novos produtos — Papelaria Virtual</div><div style="font-size:10px;color:var(--text3)">15/06/2025</div></div>
-          <span style="font-size:9.5px;background:#ECFDF5;color:#10B981;padding:2px 7px;border-radius:99px;font-weight:600">Alta</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #F3F4F6">
-          <i class="ti ti-building-store" style="color:#F59E0B;font-size:15px;flex-shrink:0"></i>
-          <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--text)">Definir layout da loja — Papelaria Física</div><div style="font-size:10px;color:var(--text3)">30/07/2025</div></div>
-          <span style="font-size:9.5px;background:#FFF7ED;color:#F59E0B;padding:2px 7px;border-radius:99px;font-weight:600">Média</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #F3F4F6">
-          <i class="ti ti-chart-line" style="color:#8B5CF6;font-size:15px;flex-shrink:0"></i>
-          <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--text)">Estudar novas oportunidades — Investimentos</div><div style="font-size:10px;color:var(--text3)">10/07/2025</div></div>
-          <span style="font-size:9.5px;background:#FFF7ED;color:#F59E0B;padding:2px 7px;border-radius:99px;font-weight:600">Média</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;padding:7px 0">
-          <i class="ti ti-school" style="color:#06B6D4;font-size:15px;flex-shrink:0"></i>
-          <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--text)">Pesquisar plataformas — Curso Online</div><div style="font-size:10px;color:var(--text3)">Sem prazo</div></div>
-          <span style="font-size:9.5px;background:#F3F4F6;color:var(--text2);padding:2px 7px;border-radius:99px;font-weight:600">Baixa</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- IDEIAS E OPORTUNIDADES -->
-    <div class="card">
-      <div class="card-header"><div class="card-title"><i class="ti ti-bulb" style="color:#F59E0B"></i>Ideias e oportunidades</div><span class="card-link">Ver todas as ideias</span></div>
-      <div style="font-size:11px;color:var(--text3);margin-bottom:12px">Anote suas ideias para o futuro</div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
-        <div style="background:#F0FFF4;border-radius:12px;padding:12px;text-align:center">
-          <div style="font-size:20px;margin-bottom:6px">🌿</div>
-          <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Franquia ELIT3 Green</div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:8px">Expandir a marca através de franquias.</div>
-          <span style="font-size:9.5px;background:#ECFDF5;color:#10B981;padding:2px 8px;border-radius:99px;font-weight:600">Nova</span>
-        </div>
-        <div style="background:#FDF2F8;border-radius:12px;padding:12px;text-align:center">
-          <div style="font-size:20px;margin-bottom:6px">🎁</div>
-          <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Loja de presentes personalizados</div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:8px">Produtos personalizados para todas as ocasiões.</div>
-          <span style="font-size:9.5px;background:#ECFDF5;color:#10B981;padding:2px 8px;border-radius:99px;font-weight:600">Nova</span>
-        </div>
-        <div style="background:#EDE9FE;border-radius:12px;padding:12px;text-align:center">
-          <div style="font-size:20px;margin-bottom:6px">👩‍💼</div>
-          <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Mentoria para empreendedoras</div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:8px">Ajudar mulheres a transformarem ideias em negócios.</div>
-          <span style="font-size:9.5px;background:#FFF7ED;color:#F59E0B;padding:2px 8px;border-radius:99px;font-weight:600">Em avaliação</span>
-        </div>
-        <div style="background:#F0FEFF;border-radius:12px;padding:12px;text-align:center">
-          <div style="font-size:20px;margin-bottom:6px">📱</div>
-          <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Aplicativo de organização</div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:8px">App para organização pessoal e produtividade.</div>
-          <span style="font-size:9.5px;background:#FFF7ED;color:#F59E0B;padding:2px 8px;border-radius:99px;font-weight:600">Em avaliação</span>
-        </div>
-        <div style="background:#F3F4F6;border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;min-height:140px" onclick="showToast('Em breve: adicionar ideias!')">
-          <div style="width:36px;height:36px;border-radius:50%;border:2px dashed #D1D5DB;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--purple2);margin-bottom:8px">+</div>
-          <div style="font-size:11px;font-weight:600;color:var(--text)">Adicionar nova ideia</div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div id="page-elit3" class="page">
@@ -2658,6 +2437,74 @@ select.inp{cursor:pointer}
   </div>
 </div>
 
+<!-- MODAL COMPROMISSO FAMÍLIA -->
+<div class="modal-overlay" id="modal-fam-comp">
+  <div class="modal">
+    <div class="modal-title">Compromisso da Família <button class="modal-close" onclick="closeModal('modal-fam-comp')"><i class="ti ti-x" style="font-size:16px"></i></button></div>
+    <input type="hidden" id="fc-editing-id">
+    <label class="form-label">Descrição</label><input class="inp" id="fc-desc" placeholder="Ex: Reunião de pais e mestres (Esmeralda)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><label class="form-label">Data</label><input class="inp" type="date" id="fc-data"></div>
+      <div><label class="form-label">Hora</label><input class="inp" type="time" id="fc-hora"></div>
+    </div>
+    <label class="form-label">Local (opcional)</label><input class="inp" id="fc-local" placeholder="Ex: Escola Arco-Íris, Clínica">
+    <label class="form-label">Categoria</label>
+    <select class="inp" id="fc-cat">
+      <option value="Escola">Escola</option><option value="Saúde">Saúde</option><option value="Lazer">Lazer</option>
+      <option value="Aniversário">Aniversário</option><option value="Família">Família</option><option value="Trabalho">Trabalho</option>
+    </select>
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn" onclick="addFamComp()" style="flex:1;justify-content:center"><i class="ti ti-plus"></i>Salvar</button>
+      <button class="btn-ghost" onclick="closeModal('modal-fam-comp')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL META FAMÍLIA -->
+<div class="modal-overlay" id="modal-fam-meta">
+  <div class="modal">
+    <div class="modal-title">Meta da Família <button class="modal-close" onclick="closeModal('modal-fam-meta')"><i class="ti ti-x" style="font-size:16px"></i></button></div>
+    <input type="hidden" id="fm-editing-id">
+    <label class="form-label">Descrição da meta</label><input class="inp" id="fm-desc" placeholder="Ex: Viagem em família, Casa própria">
+    <label class="form-label">Progresso (%)</label><input class="inp" type="number" id="fm-prog" min="0" max="100" placeholder="0">
+    <label class="form-label">Cor</label>
+    <select class="inp" id="fm-color">
+      <option value="#10B981">Verde</option><option value="#8B5CF6">Roxo</option><option value="#EC4899">Rosa</option>
+      <option value="#3B82F6">Azul</option><option value="#F59E0B">Laranja</option><option value="#06B6D4">Ciano</option>
+    </select>
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn" onclick="addFamMeta()" style="flex:1;justify-content:center"><i class="ti ti-target"></i>Salvar</button>
+      <button class="btn-ghost" onclick="closeModal('modal-fam-meta')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ELITE TASK EDIT -->
+<div class="modal-overlay" id="modal-elite-edit">
+  <div class="modal">
+    <div class="modal-title">Editar Tarefa / Lembrete <button class="modal-close" onclick="closeModal('modal-elite-edit')"><i class="ti ti-x" style="font-size:16px"></i></button></div>
+    <input type="hidden" id="ee-id">
+    <label class="form-label">Descrição</label><input class="inp" id="ee-desc" placeholder="Ex: Reunião com equipe">
+    <label class="form-label">Categoria</label>
+    <select class="inp" id="ee-cat">
+      <option value="equipe">Equipe</option><option value="parceiros">Parceiros</option>
+      <option value="projetos">Projetos ativos</option><option value="financeiro">Financeiro</option><option value="outros">Outros</option>
+    </select>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><label class="form-label">Data</label><input class="inp" type="date" id="ee-data"></div>
+      <div><label class="form-label">Hora</label><input class="inp" type="time" id="ee-hora"></div>
+    </div>
+    <label class="form-label">Prioridade</label>
+    <select class="inp" id="ee-prio"><option value="alta">Alta</option><option value="media">Média</option><option value="baixa">Baixa</option></select>
+    <label class="form-label">Repetição</label>
+    <select class="inp" id="ee-repeat"><option value="">Não repete</option><option value="diario">Diário</option><option value="semanal">Semanal</option><option value="mensal">Mensal</option></select>
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn" onclick="saveEliteEdit()" style="flex:1;justify-content:center"><i class="ti ti-device-floppy"></i>Salvar</button>
+      <button class="btn-ghost" onclick="closeModal('modal-elite-edit')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL GERENCIAR CATEGORIAS -->
 <div class="modal-overlay" id="modal-categorias">
   <div class="modal">
@@ -2718,13 +2565,36 @@ select.inp{cursor:pointer}
 
 <div class="modal-overlay" id="modal-sonho">
   <div class="modal">
-    <div class="modal-title">Novo Sonho / Objetivo <button class="modal-close" onclick="closeModal('modal-sonho')"><i class="ti ti-x" style="font-size:16px"></i></button></div>
-    <label class="form-label">Descrição</label><input class="inp" id="s-desc" placeholder="Ex: Aprender inglês, Viajar para Europa">
+    <div class="modal-title"><span id="sonho-modal-title">Nova Meta / Sonho</span> <button class="modal-close" onclick="closeModal('modal-sonho')"><i class="ti ti-x" style="font-size:16px"></i></button></div>
+    <input type="hidden" id="s-editing-id">
+    <label class="form-label">Descrição</label><input class="inp" id="s-desc" placeholder="Ex: Viagem para Europa, Casa própria">
     <label class="form-label">Prazo</label>
-    <select class="inp" id="s-prazo"><option value="curto">Curto prazo (até 6 meses)</option><option value="medio">Médio prazo</option><option value="longo">Longo prazo</option></select>
-    <label class="form-label">Progresso (%)</label><input class="inp" type="number" id="s-prog" value="0" min="0" max="100">
+    <select class="inp" id="s-prazo"><option value="curto">Curto prazo (até 6 meses)</option><option value="medio">Médio prazo (6m–2 anos)</option><option value="longo">Longo prazo (2+ anos)</option></select>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div>
+        <label class="form-label">Valor meta (R$)</label>
+        <input class="inp" type="number" id="s-valor-meta" placeholder="Ex: 15000" step="0.01">
+      </div>
+      <div>
+        <label class="form-label">Valor guardado (R$)</label>
+        <input class="inp" type="number" id="s-valor-atual" placeholder="Ex: 3500" step="0.01">
+      </div>
+    </div>
+    <label class="form-label">Onde está guardando?</label>
+    <select class="inp" id="s-local-tipo" onchange="toggleSonhoLocal()">
+      <option value="">Não especificado</option>
+      <option value="banco">Banco / Conta corrente</option>
+      <option value="poupanca">Poupança</option>
+      <option value="investimento">Investimento / CDB / Tesouro</option>
+      <option value="especie">Dinheiro em espécie</option>
+      <option value="outro">Outro</option>
+    </select>
+    <div id="s-local-banco-wrap" style="display:none;margin-top:8px">
+      <label class="form-label">Banco / Instituição</label>
+      <input class="inp" id="s-banco" placeholder="Ex: Nubank, Inter, Caixa, Bradesco">
+    </div>
     <div style="display:flex;gap:10px;margin-top:20px">
-      <button class="btn" onclick="addSonho()" style="flex:1;justify-content:center"><i class="ti ti-star"></i>Adicionar</button>
+      <button class="btn" onclick="addSonho()" style="flex:1;justify-content:center" id="sonho-save-btn"><i class="ti ti-star"></i>Salvar</button>
       <button class="btn-ghost" onclick="closeModal('modal-sonho')">Cancelar</button>
     </div>
   </div>
@@ -3063,7 +2933,7 @@ function closeModal(id){document.getElementById(id).classList.remove('open')}
 document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
 
 function renderPage(pg){
-  const map={dashboard:renderDash,foco:renderFoco,calendario:renderCalFull,habitos:renderHabitos,saude:renderSaude,financeiro:renderFin,estudos:renderEstudos,sonhos:renderSonhos,pets:renderPets,memorias:renderMemorias,relatorio:()=>{fixRelatorioData();},espiritual:renderEspiritual,familia:renderFamilia,casa:renderCasa,papelaria:renderPapelaria,projetos:()=>{},elit3:renderEliteInit};
+  const map={dashboard:renderDash,foco:renderFoco,calendario:renderCalFull,habitos:renderHabitos,saude:renderSaude,financeiro:renderFin,estudos:renderEstudos,sonhos:renderSonhos,pets:renderPets,memorias:renderMemorias,relatorio:()=>{fixRelatorioData();renderRelatorio();},espiritual:renderEspiritual,familia:renderFamilia,casa:renderCasa,papelaria:renderPapelaria,projetos:renderProjetosCustom,elit3:renderEliteInit};
   if(map[pg])map[pg]();
 }
 
@@ -3715,15 +3585,142 @@ function renderSaude(){
   </div>`).join('');
 }
 
-// FAMÍLIA
+// FAMÍLIA — COMPROMISSOS EDITÁVEIS
+function addFamComp(){
+  const desc=document.getElementById('fc-desc').value.trim();if(!desc)return;
+  const editId=document.getElementById('fc-editing-id').value;
+  const obj={desc,data:document.getElementById('fc-data').value,hora:document.getElementById('fc-hora').value,local:document.getElementById('fc-local').value,cat:document.getElementById('fc-cat').value};
+  const comps=S.arr('fam_compromissos');
+  if(editId){const c=comps.find(x=>x.id===editId);if(c)Object.assign(c,obj);}
+  else comps.push({id:uid(),...obj});
+  comps.sort((a,b)=>a.data.localeCompare(b.data));
+  S.set('fam_compromissos',comps);closeModal('modal-fam-comp');
+  ['fc-desc','fc-data','fc-hora','fc-local'].forEach(x=>document.getElementById(x).value='');
+  document.getElementById('fc-editing-id').value='';
+  renderFamilia();showToast('Compromisso salvo! 📅');
+}
+function deleteFamComp(id){S.set('fam_compromissos',S.arr('fam_compromissos').filter(x=>x.id!==id));renderFamilia();}
+function editFamComp(id){
+  const c=S.arr('fam_compromissos').find(x=>x.id===id);if(!c)return;
+  document.getElementById('fc-editing-id').value=id;
+  document.getElementById('fc-desc').value=c.desc||'';
+  document.getElementById('fc-data').value=c.data||'';
+  document.getElementById('fc-hora').value=c.hora||'';
+  document.getElementById('fc-local').value=c.local||'';
+  document.getElementById('fc-cat').value=c.cat||'Família';
+  openModal('modal-fam-comp');
+}
+// FAMÍLIA — METAS EDITÁVEIS
+function addFamMeta(){
+  const desc=document.getElementById('fm-desc').value.trim();if(!desc)return;
+  const editId=document.getElementById('fm-editing-id').value;
+  const obj={desc,prog:parseInt(document.getElementById('fm-prog').value)||0,color:document.getElementById('fm-color').value};
+  const metas=S.arr('fam_metas');
+  if(editId){const m=metas.find(x=>x.id===editId);if(m)Object.assign(m,obj);}
+  else metas.push({id:uid(),...obj});
+  S.set('fam_metas',metas);closeModal('modal-fam-meta');
+  document.getElementById('fm-editing-id').value='';
+  ['fm-desc'].forEach(x=>document.getElementById(x).value='');
+  document.getElementById('fm-prog').value='';
+  renderFamilia();showToast('Meta salva! 🎯');
+}
+function deleteFamMeta(id){S.set('fam_metas',S.arr('fam_metas').filter(x=>x.id!==id));renderFamilia();}
+function editFamMeta(id){
+  const m=S.arr('fam_metas').find(x=>x.id===id);if(!m)return;
+  document.getElementById('fm-editing-id').value=id;
+  document.getElementById('fm-desc').value=m.desc||'';
+  document.getElementById('fm-prog').value=m.prog||0;
+  document.getElementById('fm-color').value=m.color||'#EC4899';
+  openModal('modal-fam-meta');
+}
+
+// ELITE — EDITAR TAREFA
+function editEliteTask(id){
+  const t=S.arr('elite_tasks').find(x=>x.id===id);if(!t)return;
+  document.getElementById('ee-id').value=id;
+  document.getElementById('ee-desc').value=t.desc||'';
+  document.getElementById('ee-cat').value=t.cat||'outros';
+  document.getElementById('ee-data').value=t.data||'';
+  document.getElementById('ee-hora').value=t.hora||'';
+  document.getElementById('ee-prio').value=t.prio||'media';
+  document.getElementById('ee-repeat').value=t.repeat||'';
+  openModal('modal-elite-edit');
+}
+function saveEliteEdit(){
+  const id=document.getElementById('ee-id').value;if(!id)return;
+  const tasks=S.arr('elite_tasks');const t=tasks.find(x=>x.id===id);if(!t)return;
+  t.desc=document.getElementById('ee-desc').value.trim()||t.desc;
+  t.cat=document.getElementById('ee-cat').value;
+  t.data=document.getElementById('ee-data').value;
+  t.hora=document.getElementById('ee-hora').value;
+  t.prio=document.getElementById('ee-prio').value;
+  t.repeat=document.getElementById('ee-repeat').value;
+  S.set('elite_tasks',tasks);closeModal('modal-elite-edit');
+  renderElite();showToast('Tarefa atualizada! ✏️');
+}
+
+// FAMÍLIA — RENDER ATUALIZADO
 function renderFamilia(){
-  // Memórias da família (pré-carregadas ou do localStorage)
+  // Compromissos da família
+  const comps=S.arr('fam_compromissos');
+  const compEl=document.getElementById('fam-compromissos');
+  const catColors2={Escola:'#8B5CF6',Saúde:'#10B981',Lazer:'#F59E0B',Aniversário:'#EC4899',Família:'#EC4899',Trabalho:'#3B82F6'};
+  if(compEl){
+    if(!comps.length){
+      compEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--text3);font-size:12px"><i class="ti ti-calendar-off" style="font-size:28px;display:block;margin-bottom:8px;opacity:.25"></i>Nenhum compromisso cadastrado.<br><span onclick="openModal(\'modal-fam-comp\')" style="color:var(--purple2);cursor:pointer;font-weight:600">+ Adicionar compromisso</span></div>';
+    } else {
+      compEl.innerHTML=comps.map(c=>{
+        const d=c.data?new Date(c.data+'T12:00'):null;
+        const cc=catColors2[c.cat]||'#8B5CF6';
+        return `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #F3F4F6">
+          ${d?`<div style="text-align:center;min-width:40px;flex-shrink:0"><div style="font-size:16px;font-weight:900;color:${cc}">${d.getDate()}</div><div style="font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase">${d.toLocaleDateString('pt-BR',{month:'short'}).replace('.','')}</div></div>`:'<div style="min-width:40px"></div>'}
+          <div style="flex:1">
+            <div style="font-size:12.5px;font-weight:600;color:var(--text)">${c.desc}</div>
+            <div style="font-size:11px;color:var(--text3)">${c.hora||''}${c.hora&&c.local?' · ':''}${c.local||''}</div>
+          </div>
+          <span style="font-size:10px;font-weight:600;background:${cc}20;color:${cc};padding:3px 9px;border-radius:99px">${c.cat}</span>
+          <div style="display:flex;gap:2px">
+            <button onclick="editFamComp('${c.id}')" style="background:none;border:none;color:var(--purple2);cursor:pointer;padding:3px" title="Editar"><i class="ti ti-pencil" style="font-size:12px"></i></button>
+            <button onclick="deleteFamComp('${c.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer;padding:3px" title="Excluir"><i class="ti ti-trash" style="font-size:12px"></i></button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+  }
+  // Metas da família
+  const metas=S.arr('fam_metas');
+  const metaEl=document.getElementById('fam-metas-list');
+  if(metaEl){
+    if(!metas.length){
+      metaEl.innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px 0;text-align:center">Nenhuma meta cadastrada.<br><span onclick="openModal(\'modal-fam-meta\')" style="color:var(--purple2);cursor:pointer;font-weight:600">+ Adicionar meta</span></div>';
+    } else {
+      metaEl.innerHTML=metas.map(m=>`<div style="margin-bottom:10px">
+        <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:4px">
+          <span style="color:var(--text)">${m.desc}</span>
+          <div style="display:flex;align-items:center;gap:4px">
+            <span style="font-weight:700;color:${m.color}">${m.prog}%</span>
+            <button onclick="editFamMeta('${m.id}')" style="background:none;border:none;color:var(--purple2);cursor:pointer;padding:2px"><i class="ti ti-pencil" style="font-size:11px"></i></button>
+            <button onclick="deleteFamMeta('${m.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer;padding:2px"><i class="ti ti-trash" style="font-size:11px"></i></button>
+          </div>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="width:${m.prog}%;background:${m.color}"></div></div>
+      </div>`).join('');
+    }
+  }
+  // Compromissos por criança
+  const esm=document.getElementById('esmeralda-prox-comp');
+  const rod=document.getElementById('rodolfo-prox-comp');
+  if(esm){
+    const ec=comps.filter(c=>c.desc&&c.desc.toLowerCase().includes('esmeralda')).slice(0,2);
+    esm.innerHTML=ec.length?ec.map(c=>`<div style="display:flex;align-items:center;gap:5px;padding:2px 0"><i class="ti ti-calendar" style="font-size:11px;color:#8B5CF6"></i>${c.data?new Date(c.data+'T12:00').toLocaleDateString('pt-BR'):''} · ${c.desc}</div>`).join(''):'Nenhum compromisso próximo';
+  }
+  if(rod){
+    const rc=comps.filter(c=>c.desc&&c.desc.toLowerCase().includes('rodolfo')).slice(0,2);
+    rod.innerHTML=rc.length?rc.map(c=>`<div style="display:flex;align-items:center;gap:5px;padding:2px 0"><i class="ti ti-calendar" style="font-size:11px;color:#10B981"></i>${c.data?new Date(c.data+'T12:00').toLocaleDateString('pt-BR'):''} · ${c.desc}</div>`).join(''):'Nenhum compromisso próximo';
+  }
+  // Memórias
   const mems=S.arr('memorias');
-  const presetMems=[
-    {id:'m01',titulo:'Passeio no parque',data:'Maio/2025',emoji:'🌳'},
-    {id:'m02',titulo:'Aniversário de Esmeralda',data:'Abril/2025',emoji:'🎂'},
-    {id:'m03',titulo:'Páscoa em família',data:'Abril/2025',emoji:'🐣'},
-  ];
+  const presetMems=[{id:'m01',titulo:'Passeio no parque',data:'Maio/2025',emoji:'🌳'},{id:'m02',titulo:'Aniversário de Esmeralda',data:'Abril/2025',emoji:'🎂'},{id:'m03',titulo:'Páscoa em família',data:'Abril/2025',emoji:'🐣'}];
   if(!mems.length){S.set('memorias',presetMems);}
   const allMems=S.arr('memorias');
   const el2=document.getElementById('fam-mem');
@@ -4298,20 +4295,162 @@ function savePetAnot(){
   renderPets();showToast('Anotação salva!');
 }
 
-// Modal projeto
+// Modal projeto — expandido
 (function(){
   const m=document.createElement('div');
   m.className='modal-overlay';m.id='modal-projeto';
-  m.innerHTML=`<div class="modal"><div class="modal-title">Novo Projeto <button class="modal-close" onclick="closeModal('modal-projeto')"><i class="ti ti-x" style="font-size:16px"></i></button></div><label class="form-label">Nome do projeto</label><input class="inp" id="proj-nome" placeholder="Ex: Novo produto, Campanha"><label class="form-label">Emoji</label><input class="inp" id="proj-emoji" placeholder="🚀 🌿 📦" maxlength="4"><label class="form-label">Descrição</label><textarea class="inp" id="proj-desc" rows="3" placeholder="Sobre o projeto..."></textarea><label class="form-label">Status</label><select class="inp" id="proj-status"><option value="Em andamento">Em andamento</option><option value="Ideia">Ideia</option><option value="Concluído">Concluído</option><option value="Pausado">Pausado</option></select><label class="form-label">Progresso (%)</label><input class="inp" id="proj-prog" type="number" min="0" max="100" placeholder="0"><div style="display:flex;gap:10px;margin-top:20px"><button class="btn" onclick="addProjeto()" style="flex:1;justify-content:center"><i class="ti ti-plus"></i>Criar projeto</button><button class="btn-ghost" onclick="closeModal('modal-projeto')">Cancelar</button></div></div>`;
+  m.innerHTML=`<div class="modal" style="width:520px">
+    <div class="modal-title"><span id="proj-modal-title">Novo Projeto</span> <button class="modal-close" onclick="closeModal('modal-projeto')"><i class="ti ti-x" style="font-size:16px"></i></button></div>
+    <input type="hidden" id="proj-editing-id">
+    <div style="display:grid;grid-template-columns:60px 1fr;gap:10px">
+      <div><label class="form-label">Emoji</label><input class="inp" id="proj-emoji" placeholder="🚀" maxlength="4"></div>
+      <div><label class="form-label">Nome do projeto</label><input class="inp" id="proj-nome" placeholder="Ex: Novo produto, Campanha"></div>
+    </div>
+    <label class="form-label">Descrição</label><textarea class="inp" id="proj-desc" rows="2" placeholder="Sobre o projeto..."></textarea>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><label class="form-label">Status</label>
+        <select class="inp" id="proj-status"><option value="Em andamento">Em andamento</option><option value="Ideia">Ideia</option><option value="Concluído">Concluído</option><option value="Pausado">Pausado</option></select>
+      </div>
+      <div><label class="form-label">Prioridade</label>
+        <select class="inp" id="proj-prio"><option value="Alta">Alta</option><option value="Média">Média</option><option value="Baixa">Baixa</option></select>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><label class="form-label">Data prevista</label><input class="inp" type="date" id="proj-data"></div>
+      <div><label class="form-label">Progresso (%)</label><input class="inp" id="proj-prog" type="number" min="0" max="100" placeholder="0"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><label class="form-label">Orçamento (R$)</label><input class="inp" type="number" id="proj-orcamento" placeholder="0,00" step="0.01"></div>
+      <div><label class="form-label">Valor gasto (R$)</label><input class="inp" type="number" id="proj-gasto" placeholder="0,00" step="0.01"></div>
+    </div>
+    <label class="form-label">Próxima ação / Tarefas principais</label>
+    <textarea class="inp" id="proj-tarefas" rows="2" placeholder="Ex: Criar logo, Definir preços (uma por linha)"></textarea>
+    <label class="form-label">Materiais necessários</label>
+    <textarea class="inp" id="proj-materiais" rows="2" placeholder="Ex: Câmera, Software, Embalagens (uma por linha)"></textarea>
+    <label class="form-label">Observações</label>
+    <textarea class="inp" id="proj-obs" rows="2" placeholder="Qualquer informação extra..."></textarea>
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn" onclick="addProjeto()" style="flex:1;justify-content:center" id="proj-save-btn"><i class="ti ti-plus"></i>Salvar projeto</button>
+      <button class="btn-ghost" onclick="closeModal('modal-projeto')">Cancelar</button>
+    </div>
+  </div>`;
   document.body.appendChild(m);
   m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');});
 })();
 function addProjeto(){
   const nome=document.getElementById('proj-nome').value.trim();if(!nome)return;
+  const editId=document.getElementById('proj-editing-id').value;
+  const obj={
+    nome,emoji:document.getElementById('proj-emoji').value||'🚀',
+    desc:document.getElementById('proj-desc').value,
+    status:document.getElementById('proj-status').value,
+    prio:document.getElementById('proj-prio').value||'Média',
+    prog:parseInt(document.getElementById('proj-prog').value)||0,
+    data:document.getElementById('proj-data').value,
+    orcamento:parseFloat(document.getElementById('proj-orcamento').value)||0,
+    gasto:parseFloat(document.getElementById('proj-gasto').value)||0,
+    tarefas:document.getElementById('proj-tarefas').value,
+    materiais:document.getElementById('proj-materiais').value,
+    obs:document.getElementById('proj-obs').value,
+    color:'#8B5CF6'
+  };
   const projs=S.arr('projetos_custom');
-  projs.push({id:uid(),nome,emoji:document.getElementById('proj-emoji').value||'🚀',desc:document.getElementById('proj-desc').value,status:document.getElementById('proj-status').value,prog:parseInt(document.getElementById('proj-prog').value)||0,color:'#8B5CF6'});
+  if(editId){const p=projs.find(x=>x.id===editId);if(p)Object.assign(p,obj);}
+  else projs.push({id:uid(),...obj});
   S.set('projetos_custom',projs);closeModal('modal-projeto');
-  showToast('Projeto criado! 🚀');
+  renderProjetosCustom();showToast(editId?'Projeto atualizado! ✏️':'Projeto criado! 🚀');
+}
+function editProjeto(id){
+  const p=S.arr('projetos_custom').find(x=>x.id===id);if(!p)return;
+  document.getElementById('proj-editing-id').value=id;
+  document.getElementById('proj-modal-title').textContent='Editar Projeto';
+  document.getElementById('proj-save-btn').innerHTML='<i class="ti ti-device-floppy"></i>Salvar alterações';
+  document.getElementById('proj-nome').value=p.nome||'';
+  document.getElementById('proj-emoji').value=p.emoji||'';
+  document.getElementById('proj-desc').value=p.desc||'';
+  document.getElementById('proj-status').value=p.status||'Em andamento';
+  document.getElementById('proj-prio').value=p.prio||'Média';
+  document.getElementById('proj-prog').value=p.prog||0;
+  document.getElementById('proj-data').value=p.data||'';
+  document.getElementById('proj-orcamento').value=p.orcamento||'';
+  document.getElementById('proj-gasto').value=p.gasto||'';
+  document.getElementById('proj-tarefas').value=p.tarefas||'';
+  document.getElementById('proj-materiais').value=p.materiais||'';
+  document.getElementById('proj-obs').value=p.obs||'';
+  openModal('modal-projeto');
+}
+function deleteProjeto(id){
+  if(!confirm('Excluir este projeto?'))return;
+  S.set('projetos_custom',S.arr('projetos_custom').filter(x=>x.id!==id));
+  renderProjetosCustom();showToast('Projeto excluído.');
+}
+function openNewProject(){
+  document.getElementById('proj-editing-id').value='';
+  document.getElementById('proj-modal-title').textContent='Novo Projeto';
+  document.getElementById('proj-save-btn').innerHTML='<i class="ti ti-plus"></i>Criar projeto';
+  ['proj-nome','proj-emoji','proj-desc','proj-data','proj-tarefas','proj-materiais','proj-obs'].forEach(x=>document.getElementById(x).value='');
+  document.getElementById('proj-prog').value='0';
+  document.getElementById('proj-orcamento').value='';
+  document.getElementById('proj-gasto').value='';
+  document.getElementById('proj-status').value='Em andamento';
+  openModal('modal-projeto');
+}
+function renderProjetosCustom(){
+  const projs=S.arr('projetos_custom');
+  const grid=document.getElementById('projetos-custom-grid');if(!grid)return;
+  const statusColors={'Em andamento':'#10B981','Ideia':'#F59E0B','Concluído':'#8B5CF6','Pausado':'#9CA3AF'};
+  const prioColors={'Alta':'#EF4444','Média':'#F59E0B','Baixa':'#10B981'};
+  if(!projs.length){
+    grid.innerHTML=`<div class="card" style="grid-column:1/-1;border:2px dashed #E5E7EB;background:#FAFAFA;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;cursor:pointer" onclick="openNewProject()">
+      <div style="width:48px;height:48px;border-radius:50%;border:2px dashed #D1D5DB;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">🚀</div>
+      <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">Criar primeiro projeto</div>
+      <div style="font-size:12px;color:var(--text3)">Clique para adicionar seu projeto</div>
+    </div>`;
+    return;
+  }
+  const fmtR=(v)=>v?'R$ '+parseFloat(v).toLocaleString('pt-BR',{minimumFractionDigits:2}):'—';
+  grid.innerHTML=projs.map(p=>{
+    const sc=statusColors[p.status]||'#9CA3AF';
+    const pc=prioColors[p.prio]||'#F59E0B';
+    const tarefas=(p.tarefas||'').split('\n').filter(Boolean);
+    const materiais=(p.materiais||'').split('\n').filter(Boolean);
+    return `<div class="card" style="border-top:3px solid ${sc}">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:32px;height:32px;border-radius:8px;background:${sc}18;display:flex;align-items:center;justify-content:center;font-size:16px">${p.emoji||'🚀'}</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--text)">${p.nome}</div>
+            <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:2px">
+              <span style="font-size:9px;background:${sc}18;color:${sc};padding:1px 6px;border-radius:99px;font-weight:600">${p.status}</span>
+              <span style="font-size:9px;background:${pc}18;color:${pc};padding:1px 6px;border-radius:99px;font-weight:600">● ${p.prio||'Média'}</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:2px">
+          <button onclick="editProjeto('${p.id}')" style="background:none;border:none;color:var(--purple2);cursor:pointer;padding:4px" title="Editar"><i class="ti ti-pencil" style="font-size:13px"></i></button>
+          <button onclick="deleteProjeto('${p.id}')" style="background:none;border:none;color:#EF4444;cursor:pointer;padding:4px" title="Excluir"><i class="ti ti-trash" style="font-size:13px"></i></button>
+        </div>
+      </div>
+      ${p.desc?`<div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:8px">${p.desc}</div>`:''}
+      <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--text3)">Progresso</span><span style="font-weight:700;color:${sc}">${p.prog||0}%</span></div>
+      <div style="height:5px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-bottom:10px"><div style="height:100%;background:${sc};border-radius:99px;width:${p.prog||0}%"></div></div>
+      ${(p.orcamento||p.gasto)?`<div style="display:flex;gap:10px;margin-bottom:8px">
+        <div style="flex:1;background:#F9FAFB;border-radius:8px;padding:6px 8px">
+          <div style="font-size:9px;color:var(--text3)">Orçamento</div>
+          <div style="font-size:11px;font-weight:700;color:var(--text)">${fmtR(p.orcamento)}</div>
+        </div>
+        <div style="flex:1;background:#F9FAFB;border-radius:8px;padding:6px 8px">
+          <div style="font-size:9px;color:var(--text3)">Gasto</div>
+          <div style="font-size:11px;font-weight:700;color:#EF4444">${fmtR(p.gasto)}</div>
+        </div>
+      </div>`:''}
+      ${tarefas.length?`<div style="margin-bottom:6px"><div style="font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase;margin-bottom:4px">Tarefas</div>${tarefas.slice(0,3).map(t=>`<div style="display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--text2);padding:2px 0"><i class="ti ti-check" style="color:${sc};font-size:10px"></i>${t}</div>`).join('')}${tarefas.length>3?`<div style="font-size:9px;color:var(--text3)">+${tarefas.length-3} mais</div>`:''}</div>`:''}
+      ${p.data?`<div style="font-size:10px;color:var(--text3);margin-top:4px"><i class="ti ti-calendar" style="font-size:11px"></i> Prazo: ${new Date(p.data+'T12:00').toLocaleDateString('pt-BR')}</div>`:''}
+    </div>`;
+  }).join('')+`<div class="card" style="border:2px dashed #E5E7EB;background:#FAFAFA;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;min-height:120px" onclick="openNewProject()">
+    <div style="font-size:24px;margin-bottom:8px">+</div>
+    <div style="font-size:12px;font-weight:600;color:var(--text)">Novo projeto</div>
+  </div>`;
 }
 
 // Inicializar notificações de sistema
@@ -4556,6 +4695,7 @@ function renderElite(){
             ${t.repeat?`<span style="font-size:9px;color:#8B5CF6;background:#EDE9FE;padding:2px 6px;border-radius:99px">↻ ${t.repeat}</span>`:''}
           </div>
         </div>
+        <button onclick="event.stopPropagation();editEliteTask('${t.id}')" style="background:none;border:none;color:var(--purple2);cursor:pointer;padding:3px" title="Editar"><i class="ti ti-pencil" style="font-size:12px"></i></button>
         <button onclick="event.stopPropagation();deleteEliteTask('${t.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="ti ti-trash" style="font-size:13px"></i></button>
       </div>`).join('')}
     </div>`;
@@ -4574,8 +4714,54 @@ function renderElite(){
 }
 
 // ═══════════════════════════════════
-// RELATÓRIO — datas automáticas + exportar
+// RELATÓRIO — renderRelatorio com dados reais
 // ═══════════════════════════════════
+function renderRelatorio(){
+  const tasks=S.arr('tasks');
+  const habits=S.arr('habits');
+  const fins=S.arr('financeiro');
+  const now=new Date();
+  // Areas da vida baseadas em dados reais
+  const totalTasks=tasks.length||1;
+  const doneTasks=tasks.filter(t=>t.status==='done').length;
+  const taskPct=Math.round(doneTasks/totalTasks*100);
+  const totalHabs=habits.length||1;
+  const doneHabs=habits.filter(h=>(h.done||[]).includes(today())).length;
+  const habPct=Math.round(doneHabs/totalHabs*100);
+  const areas=[
+    {l:'Saúde',v:habPct||75,c:'#EC4899'},
+    {l:'Finanças',v:fins.length?Math.min(100,fins.filter(f=>f.tipo==='receita').length*10+60):50,c:'#10B981'},
+    {l:'Projetos',v:S.arr('projetos_custom').length?Math.min(100,Math.round(S.arr('projetos_custom').reduce((a,p)=>a+(p.prog||0),0)/S.arr('projetos_custom').length)):60,c:'#8B5CF6'},
+    {l:'Tarefas',v:taskPct||65,c:'#F59E0B'},
+    {l:'Hábitos',v:habPct||70,c:'#2DD4BF'},
+    {l:'Casa',v:72,c:'#3B82F6'},
+    {l:'Família',v:80,c:'#F472B6'},
+    {l:'Espirit.',v:65,c:'#818CF8'},
+  ];
+  const areasEl=document.getElementById('rel-areas-content');
+  if(areasEl){
+    areasEl.innerHTML=areas.map(a=>`<div style="text-align:center">
+      <div style="height:80px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:6px">
+        <div style="width:28px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,${a.c},${a.c}80);height:${a.v}%" title="${a.v}%"></div>
+      </div>
+      <div style="font-size:10px;font-weight:700;color:var(--text)">${a.l}</div>
+      <div style="font-size:11px;font-weight:800;color:${a.c}">${a.v}%</div>
+    </div>`).join('');
+  }
+  // Distribuição de foco baseada em tarefas por categoria
+  const catCount={};tasks.forEach(t=>{catCount[t.cat]=(catCount[t.cat]||0)+1;});
+  const focoEl=document.getElementById('rel-foco-dist');
+  if(focoEl&&Object.keys(catCount).length){
+    const total=tasks.length||1;
+    const catLabels2={saude:'Saúde',casa:'Casa',familia:'Família',trabalho:'Elit3/Projetos',papelaria:'Papelaria',estudos:'Estudos',espiritual:'Espiritual',pessoal:'Outros'};
+    const catColors3={saude:'#EC4899',casa:'#2DD4BF',familia:'#F472B6',trabalho:'#10B981',papelaria:'#8B5CF6',estudos:'#F59E0B',espiritual:'#818CF8',pessoal:'#9CA3AF'};
+    const entries=Object.entries(catCount).sort((a,b)=>b[1]-a[1]).slice(0,5);
+    focoEl.innerHTML=entries.map(([cat,count])=>{
+      const pct=Math.round(count/total*100);const c=catColors3[cat]||'#9CA3AF';
+      return `<div style="display:flex;align-items:center;justify-content:space-between;font-size:11px"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:${c};display:inline-block"></span>${catLabels2[cat]||cat}</span><span style="font-weight:700;color:${c}">${pct}%</span></div>`;
+    }).join('');
+  }
+}
 function exportRelatorio(){
   const tasks=S.arr('tasks');
   const habits=S.arr('habits');
@@ -5046,19 +5232,73 @@ function updEst(id,d){const e=S.arr('estudos');const i=e.find(x=>x.id===id);if(i
 function deleteEstudo(id){S.set('estudos',S.arr('estudos').filter(e=>e.id!==id));renderEstudos();}
 
 // SONHOS
+function toggleSonhoLocal(){
+  const v=document.getElementById('s-local-tipo').value;
+  const bw=document.getElementById('s-local-banco-wrap');
+  if(bw)bw.style.display=(v==='banco'||v==='poupanca'||v==='investimento')?'block':'none';
+}
 function addSonho(){
   const desc=document.getElementById('s-desc').value.trim();if(!desc)return;
+  const editId=document.getElementById('s-editing-id')?document.getElementById('s-editing-id').value:'';
+  const valorMeta=parseFloat(document.getElementById('s-valor-meta').value)||0;
+  const valorAtual=parseFloat(document.getElementById('s-valor-atual').value)||0;
+  const prog=valorMeta>0?Math.min(100,Math.round(valorAtual/valorMeta*100)):0;
+  const localTipo=document.getElementById('s-local-tipo').value;
+  const banco=document.getElementById('s-banco')?document.getElementById('s-banco').value:'';
+  const obj={desc,prazo:document.getElementById('s-prazo').value,prog,valorMeta,valorAtual,localTipo,banco};
   const sonhos=S.arr('sonhos');
-  sonhos.push({id:uid(),desc,prazo:document.getElementById('s-prazo').value,prog:parseInt(document.getElementById('s-prog').value)||0});
+  if(editId){const s=sonhos.find(x=>x.id===editId);if(s)Object.assign(s,obj);}
+  else sonhos.push({id:uid(),...obj});
   S.set('sonhos',sonhos);closeModal('modal-sonho');renderSonhos();renderDashMetas();
+  showToast(editId?'Meta atualizada! ✏️':'Meta adicionada! ⭐');
+}
+
+function openEditSonho(id){
+  const s=S.arr('sonhos').find(x=>x.id===id);if(!s)return;
+  document.getElementById('s-editing-id').value=id;
+  document.getElementById('sonho-modal-title').textContent='Editar Meta / Sonho';
+  document.getElementById('sonho-save-btn').innerHTML='<i class="ti ti-device-floppy"></i>Salvar';
+  document.getElementById('s-desc').value=s.desc||'';
+  document.getElementById('s-prazo').value=s.prazo||'curto';
+  document.getElementById('s-valor-meta').value=s.valorMeta||'';
+  document.getElementById('s-valor-atual').value=s.valorAtual||'';
+  document.getElementById('s-local-tipo').value=s.localTipo||'';
+  toggleSonhoLocal();
+  if(document.getElementById('s-banco'))document.getElementById('s-banco').value=s.banco||'';
+  openModal('modal-sonho');
 }
 
 function renderSonhos(){
   const sonhos=S.arr('sonhos');const el=document.getElementById('son-list');if(!el)return;
   const prazoLabel={curto:'🎯 Curto Prazo',medio:'🌱 Médio Prazo',longo:'🚀 Longo Prazo'};
   const prazoColor={curto:'#10B981',medio:'#8B5CF6',longo:'#EC4899'};
-  if(!sonhos.length){el.innerHTML=`<div class="card" style="grid-column:1/-1"><div class="empty"><i class="ti ti-star"></i><p>Adicione seus sonhos!</p><button class="btn" onclick="openModal('modal-sonho')" style="margin:0 auto">Adicionar</button></div></div>`;return;}
-  el.innerHTML=sonhos.map(s=>`<div class="card"><div style="margin-bottom:8px"><span class="pill" style="background:${prazoColor[s.prazo]}18;color:${prazoColor[s.prazo]}">${prazoLabel[s.prazo]}</span></div><div style="font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:12px">${s.desc}</div><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:5px"><span>Progresso</span><span style="font-weight:600;color:${prazoColor[s.prazo]}">${s.prog}%</span></div><div class="prog-bar"><div class="prog-fill" style="width:${s.prog}%;background:${prazoColor[s.prazo]}"></div></div><div style="display:flex;gap:6px;margin-top:12px"><button onclick="updSon('${s.id}',-10)" class="btn-ghost" style="flex:1;justify-content:center">-10%</button><button onclick="updSon('${s.id}',10)" class="btn-ghost" style="flex:1;justify-content:center">+10%</button><button onclick="delSon('${s.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="ti ti-trash"></i></button></div></div>`).join('');
+  const localLabel={'banco':'🏦 Banco','poupanca':'🏦 Poupança','investimento':'📈 Investimento','especie':'💵 Espécie','outro':'📁 Outro',''	:'—'};
+  const fmtR=(v)=>v?'R$ '+parseFloat(v).toLocaleString('pt-BR',{minimumFractionDigits:2}):'—';
+  if(!sonhos.length){el.innerHTML=`<div class="card" style="grid-column:1/-1"><div class="empty"><i class="ti ti-star"></i><p>Adicione suas metas e sonhos!</p><button class="btn" onclick="openModal('modal-sonho')" style="margin:0 auto">Adicionar</button></div></div>`;return;}
+  el.innerHTML=sonhos.map(s=>{
+    const c=prazoColor[s.prazo]||'#8B5CF6';
+    const prog=s.valorMeta&&s.valorAtual?Math.min(100,Math.round(parseFloat(s.valorAtual)/parseFloat(s.valorMeta)*100)):(s.prog||0);
+    return `<div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <span class="pill" style="background:${c}18;color:${c}">${prazoLabel[s.prazo]||'Meta'}</span>
+        <div style="display:flex;gap:2px">
+          <button onclick="openEditSonho('${s.id}')" style="background:none;border:none;color:var(--purple2);cursor:pointer;padding:4px" title="Editar"><i class="ti ti-pencil" style="font-size:13px"></i></button>
+          <button onclick="delSon('${s.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer;padding:4px"><i class="ti ti-trash" style="font-size:13px"></i></button>
+        </div>
+      </div>
+      <div style="font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:10px">${s.desc}</div>
+      ${s.valorMeta?`<div style="background:#F9FAFB;border-radius:10px;padding:10px;margin-bottom:10px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div><div style="font-size:9px;color:var(--text3);font-weight:600;text-transform:uppercase">Meta</div><div style="font-size:13px;font-weight:800;color:var(--text)">${fmtR(s.valorMeta)}</div></div>
+          <div><div style="font-size:9px;color:var(--text3);font-weight:600;text-transform:uppercase">Guardado</div><div style="font-size:13px;font-weight:800;color:${c}">${fmtR(s.valorAtual)}</div></div>
+        </div>
+        ${s.localTipo?`<div style="margin-top:6px;font-size:10.5px;color:var(--text2)"><i class="ti ti-map-pin" style="font-size:11px"></i> ${localLabel[s.localTipo]}${s.banco?' — '+s.banco:''}</div>`:''}
+      </div>`:''}
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:5px"><span>Progresso</span><span style="font-weight:700;color:${c}">${prog}%</span></div>
+      <div class="prog-bar"><div class="prog-fill" style="width:${prog}%;background:${c}"></div></div>
+      ${!s.valorMeta?`<div style="display:flex;gap:6px;margin-top:12px"><button onclick="updSon('${s.id}',-10)" class="btn-ghost" style="flex:1;justify-content:center">-10%</button><button onclick="updSon('${s.id}',10)" class="btn-ghost" style="flex:1;justify-content:center">+10%</button></div>`:''}
+    </div>`;
+  }).join('');
 }
 
 function updSon(id,d){const s=S.arr('sonhos');const i=s.find(x=>x.id===id);if(i)i.prog=Math.min(100,Math.max(0,(i.prog||0)+d));S.set('sonhos',s);renderSonhos();if(document.getElementById('page-dashboard').classList.contains('active'))renderDashMetas();}
@@ -5559,7 +5799,8 @@ const ALL_KEYS = [
   'vacinas','elite_tasks','projetos_custom','cartoes_custom','metas_fin_custom',
   'notas_casa','bianca2_events','bianca2_habits','bianca2_tasks',
   'bianca2_notas_mes','bianca2_memorias','bianca2_casa_rotinas_done',
-  'cap_items','cap_notas','contas_fixas','cats_fin','fin_recorrentes'
+  'cap_items','cap_notas','contas_fixas','cats_fin','fin_recorrentes',
+  'fam_compromissos','fam_metas','projetos_custom'
 ];
 
 async function loadAllFromSupabase(){
