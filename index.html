@@ -1403,9 +1403,9 @@ select.inp{cursor:pointer}
       </div>
       <!-- CONTAS FIXAS -->
       <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-receipt" style="color:#3B82F6"></i>Contas fixas</div><span class="card-link" onclick="openNovaContaFixa()">+ Adicionar</span></div>
+        <div class="card-header"><div class="card-title"><i class="ti ti-receipt" style="color:#3B82F6"></i>Contas fixas</div><span class="card-link" onclick="openModal('modal-fin')" title="Use Novo Lançamento e marque como Conta Fixa">+ Via Lançamento</span></div>
         <div id="fin-contas-fixas"></div>
-        <button class="btn-ghost" style="width:100%;justify-content:center;display:flex;margin-top:10px;font-size:11px" onclick="openNovaContaFixa()"><i class="ti ti-plus"></i>Adicionar conta fixa</button>
+        <button class="btn-ghost" style="width:100%;justify-content:center;display:flex;margin-top:10px;font-size:11px" onclick="openModal('modal-fin')"><i class="ti ti-plus"></i>Novo lançamento fixo</button>
       </div>
       <!-- CARTÕES E METAS -->
       <div style="display:flex;flex-direction:column;gap:14px">
@@ -1424,12 +1424,12 @@ select.inp{cursor:pointer}
     <!-- ÚLTIMAS RECEITAS + DESPESAS -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
       <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-trending-up" style="color:#10B981"></i>Últimas receitas</div><span class="card-link" onclick="nav('financeiro')">Ver todas</span></div>
+        <div class="card-header"><div class="card-title"><i class="ti ti-trending-up" style="color:#10B981"></i>Últimas receitas</div><span class="card-link" onclick="abrirTodasReceitas()">Ver todas →</span></div>
         <div id="fin-receitas-list"></div>
         <div style="margin-top:10px;padding-top:8px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span>Total</span><span style="color:#10B981" id="fin-rec-total-label">R$ 0,00</span></div>
       </div>
       <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-trending-down" style="color:#EF4444"></i>Últimas despesas</div><span class="card-link" onclick="nav('financeiro')">Ver todas</span></div>
+        <div class="card-header"><div class="card-title"><i class="ti ti-trending-down" style="color:#EF4444"></i>Últimas despesas</div><span class="card-link" onclick="abrirTodasDespesas()">Ver todas →</span></div>
         <div id="fin-despesas-list"></div>
         <div style="margin-top:10px;padding-top:8px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span>Total</span><span style="color:#EF4444" id="fin-desp-total-label">R$ 0,00</span></div>
       </div>
@@ -2592,16 +2592,68 @@ select.inp{cursor:pointer}
       <div style="font-size:10.5px;color:var(--text3);margin-top:4px">O valor será lançado mês a mês pelo total de parcelas informado.</div>
     </div>
 
-    <!-- Fixo: sem prazo definido -->
+    <!-- Fixo: sem prazo definido + opção de conta fixa -->
     <div id="f-fixo-wrap" style="display:none">
       <div style="background:#EDE9FE;border-radius:10px;padding:10px 12px;font-size:11.5px;color:#4C1D95;line-height:1.5">
-        🔁 <strong>Lançamento fixo</strong> — vai aparecer automaticamente todo mês até você remover. Ideal para internet, aluguel, financiamento, etc.
+        🔁 <strong>Lançamento fixo</strong> — vai aparecer automaticamente todo mês até você remover.
+      </div>
+    </div>
+
+    <!-- CONTA FIXA CHECKBOX — aparece quando recorrência = fixo ou parcelado -->
+    <div id="f-conta-fixa-wrap" style="display:none;margin-top:10px">
+      <label style="display:flex;align-items:center;gap:10px;background:#F0FDF4;border:1.5px solid #A7F3D0;border-radius:10px;padding:10px 12px;cursor:pointer" id="f-conta-fixa-label">
+        <input type="checkbox" id="f-is-conta-fixa" onchange="toggleContaFixaOpcao()" style="width:16px;height:16px;cursor:pointer;accent-color:#10B981;flex-shrink:0">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#065F46">📋 Adicionar às Contas Fixas</div>
+          <div style="font-size:10.5px;color:#6EE7B7;margin-top:1px">Aparecerá automaticamente no painel de Contas Fixas</div>
+        </div>
+      </label>
+      <!-- Campos extras para conta fixa -->
+      <div id="f-conta-fixa-extras" style="display:none;margin-top:8px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div>
+            <label class="form-label">Emoji da conta</label>
+            <input class="inp" id="f-cf-icon" placeholder="🏠 ⚡ 💧 🌐" maxlength="4">
+          </div>
+          <div>
+            <label class="form-label">Dia de vencimento</label>
+            <input class="inp" type="number" id="f-cf-vence" placeholder="Ex: 10" min="1" max="31">
+          </div>
+        </div>
       </div>
     </div>
 
     <div style="display:flex;gap:10px;margin-top:20px">
       <button class="btn" onclick="addFin()" style="flex:1;justify-content:center"><i class="ti ti-plus"></i>Lançar</button>
       <button class="btn-ghost" onclick="closeModal('modal-fin')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL VER TODAS RECEITAS -->
+<div class="modal-overlay" id="modal-todas-receitas">
+  <div class="modal" style="width:520px;max-height:80vh">
+    <div class="modal-title">Todas as Receitas <button class="modal-close" onclick="closeModal('modal-todas-receitas')"><i class="ti ti-x" style="font-size:16px"></i></button></div>
+    <div style="margin-bottom:10px;display:flex;gap:8px">
+      <select class="inp" id="tr-filter-cat" onchange="renderTodasReceitas()" style="flex:1;font-size:11px;padding:6px 10px"><option value="">Todas categorias</option></select>
+    </div>
+    <div id="modal-receitas-list" style="max-height:55vh;overflow-y:auto"></div>
+    <div style="margin-top:10px;padding-top:8px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;font-size:12px;font-weight:700">
+      <span>Total</span><span style="color:#10B981" id="modal-rec-total">R$ 0,00</span>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL VER TODAS DESPESAS -->
+<div class="modal-overlay" id="modal-todas-despesas">
+  <div class="modal" style="width:520px;max-height:80vh">
+    <div class="modal-title">Todas as Despesas <button class="modal-close" onclick="closeModal('modal-todas-despesas')"><i class="ti ti-x" style="font-size:16px"></i></button></div>
+    <div style="margin-bottom:10px;display:flex;gap:8px">
+      <select class="inp" id="td-filter-cat" onchange="renderTodasDespesas()" style="flex:1;font-size:11px;padding:6px 10px"><option value="">Todas categorias</option></select>
+    </div>
+    <div id="modal-despesas-list" style="max-height:55vh;overflow-y:auto"></div>
+    <div style="margin-top:10px;padding-top:8px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;font-size:12px;font-weight:700">
+      <span>Total</span><span style="color:#EF4444" id="modal-desp-total">R$ 0,00</span>
     </div>
   </div>
 </div>
@@ -3823,6 +3875,16 @@ function toggleFinRecorrencia(){
   const val=document.querySelector('input[name="f-recorrencia"]:checked').value;
   document.getElementById('f-parcelas-wrap').style.display=val==='parcelado'?'block':'none';
   document.getElementById('f-fixo-wrap').style.display=val==='fixo'?'block':'none';
+  // Mostrar checkbox de conta fixa apenas para fixo ou parcelado
+  const cfWrap=document.getElementById('f-conta-fixa-wrap');
+  if(cfWrap)cfWrap.style.display=(val==='fixo'||val==='parcelado')?'block':'none';
+  // Se não mostrar, desmarcar o checkbox
+  if(val==='unico'){
+    const cb=document.getElementById('f-is-conta-fixa');
+    if(cb){cb.checked=false;}
+    const extras=document.getElementById('f-conta-fixa-extras');
+    if(extras)extras.style.display='none';
+  }
   // Update radio label styles
   document.getElementById('rec-unico-label').style.borderColor=val==='unico'?'var(--purple2)':'#E5E7EB';
   document.getElementById('rec-unico-label').style.color=val==='unico'?'var(--purple2)':'var(--text2)';
@@ -3830,6 +3892,14 @@ function toggleFinRecorrencia(){
   document.getElementById('rec-parc-label').style.color=val==='parcelado'?'var(--purple2)':'var(--text2)';
   document.getElementById('rec-fixo-label').style.borderColor=val==='fixo'?'var(--purple2)':'#E5E7EB';
   document.getElementById('rec-fixo-label').style.color=val==='fixo'?'var(--purple2)':'var(--text2)';
+}
+
+function toggleContaFixaOpcao(){
+  const cb=document.getElementById('f-is-conta-fixa');
+  const extras=document.getElementById('f-conta-fixa-extras');
+  if(extras)extras.style.display=cb&&cb.checked?'block':'none';
+  const lbl=document.getElementById('f-conta-fixa-label');
+  if(lbl)lbl.style.borderColor=cb&&cb.checked?'#10B981':'#A7F3D0';
 }
 
 function toggleCfTipo(){
@@ -3845,6 +3915,7 @@ function addFin(){
   const dataBase=document.getElementById('f-data').value;
   const cat=document.getElementById('f-cat').value;
   const recorrencia=document.querySelector('input[name="f-recorrencia"]:checked').value;
+  const isContaFixa=document.getElementById('f-is-conta-fixa')&&document.getElementById('f-is-conta-fixa').checked;
   const fins=S.arr('financeiro');
   const grupoId=uid(); // ID de grupo para parcelas/fixos
 
@@ -3865,6 +3936,16 @@ function addFin(){
       });
     }
     fins.sort((a,b)=>b.data.localeCompare(a.data));
+    // Se marcado como conta fixa, adicionar ao painel de contas fixas
+    if(isContaFixa){
+      const icon=document.getElementById('f-cf-icon').value||'💳';
+      const vence=parseInt(document.getElementById('f-cf-vence').value)||parseInt(dataBase?dataBase.slice(8,10):'1')||1;
+      const parcelas2=parseInt(document.getElementById('f-parcelas').value)||1;
+      const contas=S.arr('contas_fixas');
+      const cfId=grupoId;
+      contas.push({id:cfId,icon,label:desc,val,vence,pago:false,tipo:'parcelado',parcelasTotal:parcelas2,parcelasPagas:0,fromLancamento:true});
+      S.set('contas_fixas',contas);
+    }
   } else if(recorrencia==='fixo'){
     // Lança o mês atual + registra como fixo recorrente
     fins.unshift({id:uid(),tipo,desc,valor:val,data:dataBase,cat,recorrencia:'fixo',grupoId});
@@ -3872,18 +3953,33 @@ function addFin(){
     const recorrentes=S.arr('fin_recorrentes');
     recorrentes.push({id:grupoId,tipo,desc,valor:val,cat,diaVencimento:dataBase?parseInt(dataBase.slice(8,10)):1,ativo:true});
     S.set('fin_recorrentes',recorrentes);
+    // Se marcado como conta fixa, adicionar ao painel de contas fixas
+    if(isContaFixa){
+      const icon=document.getElementById('f-cf-icon').value||'🔁';
+      const vence=parseInt(document.getElementById('f-cf-vence').value)||parseInt(dataBase?dataBase.slice(8,10):'1')||1;
+      const contas=S.arr('contas_fixas');
+      // Vincular cfId ao grupoId para sincronização
+      contas.push({id:grupoId,icon,label:desc,val,vence,pago:false,tipo:'fixo',parcelasTotal:0,parcelasPagas:0,fromLancamento:true});
+      S.set('contas_fixas',contas);
+    }
   }
 
   S.set('financeiro',fins);closeModal('modal-fin');
   document.getElementById('f-desc').value='';document.getElementById('f-val').value='';
   document.getElementById('f-data').value='';document.getElementById('f-tipo').value='receita';
   document.getElementById('f-parcelas').value='';
+  if(document.getElementById('f-is-conta-fixa'))document.getElementById('f-is-conta-fixa').checked=false;
+  if(document.getElementById('f-cf-icon'))document.getElementById('f-cf-icon').value='';
+  if(document.getElementById('f-cf-vence'))document.getElementById('f-cf-vence').value='';
+  if(document.getElementById('f-conta-fixa-extras'))document.getElementById('f-conta-fixa-extras').style.display='none';
+  if(document.getElementById('f-conta-fixa-wrap'))document.getElementById('f-conta-fixa-wrap').style.display='none';
   document.querySelector('input[name="f-recorrencia"][value="unico"]').checked=true;
   toggleFinRecorrencia();
   // Gerar lançamentos dos fixos para o mês atual se ainda não existirem
   gerarLancamentosRecorrentes();
   renderFin();if(document.getElementById('page-dashboard').classList.contains('active'))renderFinDash();
-  showToast(recorrencia==='parcelado'?`${parseInt(document.getElementById('f-parcelas').value)||1} parcelas lançadas! 📅`:recorrencia==='fixo'?'Lançamento fixo criado! 🔁':'Lançamento salvo! ✅');
+  const numParc=parseInt(document.getElementById('f-parcelas')?document.getElementById('f-parcelas').value:0)||0;
+  showToast(recorrencia==='parcelado'?`${numParc||1} parcelas lançadas! 📅`:recorrencia==='fixo'?'Lançamento fixo criado! 🔁':'Lançamento salvo! ✅');
 }
 
 // Gera automaticamente os lançamentos dos recorrentes para o mês atual
@@ -4700,7 +4796,7 @@ function renderFin(){
   const contEl=document.getElementById('fin-contas-fixas');
   if(contEl){
     if(!contasFixasCustom.length){
-      contEl.innerHTML=`<div style="text-align:center;padding:20px 16px;color:var(--text3);font-size:12px"><i class="ti ti-receipt" style="font-size:28px;display:block;margin-bottom:8px;opacity:.25"></i>Nenhuma conta cadastrada ainda.<br><br><span style="color:var(--purple2);cursor:pointer;font-weight:600" onclick="openNovaContaFixa()">+ Adicionar primeira conta</span></div>`;
+      contEl.innerHTML=`<div style="text-align:center;padding:16px;color:var(--text3);font-size:12px"><i class="ti ti-receipt" style="font-size:28px;display:block;margin-bottom:8px;opacity:.25"></i>Nenhuma conta cadastrada ainda.<br><br><span style="color:var(--purple2);cursor:pointer;font-weight:600" onclick="openModal('modal-fin')">+ Adicionar via Novo Lançamento</span></div>`;
     } else {
       // Calcular total de contas fixas
       const totalFixo=contasFixasCustom.reduce((a,c)=>a+parseFloat(c.val||0),0);
@@ -4873,7 +4969,63 @@ function renderFin(){
   }
 }
 
-function deleteFin(id){S.set('financeiro',S.arr('financeiro').filter(f=>f.id!==id));renderFin();if(document.getElementById('page-dashboard').classList.contains('active'))renderFinDash();}
+function deleteFin(id){S.set('financeiro',S.arr('financeiro').filter(f=>f.id!==id));renderFin();if(document.getElementById('page-dashboard').classList.contains('active'))renderFinDash();if(document.getElementById('modal-todas-receitas').classList.contains('open'))renderTodasReceitas();if(document.getElementById('modal-todas-despesas').classList.contains('open'))renderTodasDespesas();}
+
+function abrirTodasReceitas(){
+  openModal('modal-todas-receitas');
+  renderTodasReceitas();
+}
+function abrirTodasDespesas(){
+  openModal('modal-todas-despesas');
+  renderTodasDespesas();
+}
+function renderTodasReceitas(){
+  const fins=S.arr('financeiro');
+  const fmtR=(v)=>'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const catSel=document.getElementById('tr-filter-cat');
+  const catVal=catSel?catSel.value:'';
+  const receitas=fins.filter(f=>f.tipo==='receita');
+  // Popular cats
+  if(catSel){
+    const allCats=[...new Set(receitas.map(f=>f.cat||'Outros'))].sort();
+    const prev=catSel.value;
+    catSel.innerHTML='<option value="">Todas categorias</option>'+allCats.map(c=>`<option value="${c}">${c}</option>`).join('');
+    catSel.value=prev;
+  }
+  const filtradas=receitas.filter(f=>!catVal||(f.cat||'Outros')===catVal);
+  const total=filtradas.reduce((a,b)=>a+(b.valor||0),0);
+  const el=document.getElementById('modal-receitas-list');
+  if(el)el.innerHTML=filtradas.length?filtradas.map(r=>`<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #F3F4F6">
+    <div style="width:32px;height:32px;border-radius:8px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-trending-up" style="color:#10B981;font-size:14px"></i></div>
+    <div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--text)">${r.desc}</div><div style="font-size:10px;color:var(--text3)">${r.cat||''}${r.data?' · '+new Date(r.data+'T12:00').toLocaleDateString('pt-BR'):''}</div></div>
+    <div style="font-size:12px;font-weight:700;color:#10B981">${fmtR(r.valor||0)}</div>
+    <button onclick="deleteFin('${r.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="ti ti-trash" style="font-size:12px"></i></button>
+  </div>`).join(''):'<div style="font-size:12px;color:var(--text3);padding:16px 0;text-align:center">Nenhuma receita lançada.</div>';
+  const tot=document.getElementById('modal-rec-total');if(tot)tot.textContent=fmtR(total);
+}
+function renderTodasDespesas(){
+  const fins=S.arr('financeiro');
+  const fmtR=(v)=>'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const catSel=document.getElementById('td-filter-cat');
+  const catVal=catSel?catSel.value:'';
+  const despesas=fins.filter(f=>f.tipo==='despesa');
+  if(catSel){
+    const allCats=[...new Set(despesas.map(f=>f.cat||'Outros'))].sort();
+    const prev=catSel.value;
+    catSel.innerHTML='<option value="">Todas categorias</option>'+allCats.map(c=>`<option value="${c}">${c}</option>`).join('');
+    catSel.value=prev;
+  }
+  const filtradas=despesas.filter(f=>!catVal||(f.cat||'Outros')===catVal);
+  const total=filtradas.reduce((a,b)=>a+(b.valor||0),0);
+  const el=document.getElementById('modal-despesas-list');
+  if(el)el.innerHTML=filtradas.length?filtradas.map(d=>`<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #F3F4F6">
+    <div style="width:32px;height:32px;border-radius:8px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-trending-down" style="color:#EF4444;font-size:14px"></i></div>
+    <div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--text)">${d.desc}</div><div style="font-size:10px;color:var(--text3)">${d.cat||''}${d.data?' · '+new Date(d.data+'T12:00').toLocaleDateString('pt-BR'):''}</div></div>
+    <div style="font-size:12px;font-weight:700;color:#EF4444">${fmtR(d.valor||0)}</div>
+    <button onclick="deleteFin('${d.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="ti ti-trash" style="font-size:12px"></i></button>
+  </div>`).join(''):'<div style="font-size:12px;color:var(--text3);padding:16px 0;text-align:center">Nenhuma despesa lançada.</div>';
+  const tot=document.getElementById('modal-desp-total');if(tot)tot.textContent=fmtR(total);
+}
 
 // ESTUDOS
 function addEstudo(){
