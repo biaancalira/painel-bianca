@@ -1438,7 +1438,7 @@ select.inp{cursor:pointer}
     <!-- TODOS OS LANÇAMENTOS (lista completa com delete) -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
       <div class="card">
-        <div class="card-header"><div class="card-title"><i class="ti ti-calendar-stats" style="color:var(--purple2)"></i>Todos os lançamentos</div></div>
+        <div class="card-header"><div class="card-title"><i class="ti ti-calendar-stats" style="color:var(--purple2)"></i>Todos os lançamentos</div><span class="card-link" onclick="abrirTodosLancamentos()">Ver todos →</span></div>
         <div style="margin-bottom:10px;display:flex;gap:8px">
           <select class="inp" id="fin-filter-tipo" onchange="renderFin()" style="flex:1;font-size:11px;padding:6px 10px"><option value="">Todos</option><option value="receita">Receitas</option><option value="despesa">Despesas</option></select>
           <select class="inp" id="fin-filter-cat" onchange="renderFin()" style="flex:1;font-size:11px;padding:6px 10px"><option value="">Todas categorias</option></select>
@@ -2378,13 +2378,13 @@ select.inp{cursor:pointer}
       </div>
     </div>
 
-    <!-- CONTA FIXA CHECKBOX — aparece quando recorrência = fixo ou parcelado -->
-    <div id="f-conta-fixa-wrap" style="display:none;margin-top:10px">
+    <!-- CONTA FIXA CHECKBOX — disponível para qualquer tipo de lançamento -->
+    <div id="f-conta-fixa-wrap" style="display:block;margin-top:10px">
       <label style="display:flex;align-items:center;gap:10px;background:#F0FDF4;border:1.5px solid #A7F3D0;border-radius:10px;padding:10px 12px;cursor:pointer" id="f-conta-fixa-label">
         <input type="checkbox" id="f-is-conta-fixa" onchange="toggleContaFixaOpcao()" style="width:16px;height:16px;cursor:pointer;accent-color:#10B981;flex-shrink:0">
         <div>
           <div style="font-size:12px;font-weight:700;color:#065F46">📋 Adicionar às Contas Fixas</div>
-          <div style="font-size:10.5px;color:#6EE7B7;margin-top:1px">Aparecerá automaticamente no painel de Contas Fixas</div>
+          <div style="font-size:10.5px;color:#6EE7B7;margin-top:1px">Aparecerá automaticamente no painel de Contas Fixas — sem precisar cadastrar duas vezes</div>
         </div>
       </label>
       <!-- Campos extras para conta fixa -->
@@ -2433,6 +2433,25 @@ select.inp{cursor:pointer}
     <div id="modal-despesas-list" style="max-height:55vh;overflow-y:auto"></div>
     <div style="margin-top:10px;padding-top:8px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;font-size:12px;font-weight:700">
       <span>Total</span><span style="color:#EF4444" id="modal-desp-total">R$ 0,00</span>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL VER TODOS OS LANÇAMENTOS -->
+<div class="modal-overlay" id="modal-todos-lancamentos">
+  <div class="modal" style="width:580px;max-height:85vh">
+    <div class="modal-title">Todos os Lançamentos <button class="modal-close" onclick="closeModal('modal-todos-lancamentos')"><i class="ti ti-x" style="font-size:16px"></i></button></div>
+    <div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <select class="inp" id="tl-filter-tipo" onchange="renderTodosLancamentos()" style="flex:1;min-width:120px;font-size:11px;padding:6px 10px"><option value="">Todos os tipos</option><option value="receita">Receitas</option><option value="despesa">Despesas</option></select>
+      <select class="inp" id="tl-filter-cat" onchange="renderTodosLancamentos()" style="flex:1;min-width:140px;font-size:11px;padding:6px 10px"><option value="">Todas categorias</option></select>
+    </div>
+    <div id="modal-todos-list" style="max-height:58vh;overflow-y:auto"></div>
+    <div style="margin-top:10px;padding-top:8px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700">
+      <span id="tl-count-label" style="color:var(--text3);font-weight:500"></span>
+      <div style="display:flex;gap:16px">
+        <span>Receitas: <span style="color:#10B981" id="modal-tl-rec">R$ 0,00</span></span>
+        <span>Despesas: <span style="color:#EF4444" id="modal-tl-desp">R$ 0,00</span></span>
+      </div>
     </div>
   </div>
 </div>
@@ -3872,16 +3891,9 @@ function toggleFinRecorrencia(){
   const val=document.querySelector('input[name="f-recorrencia"]:checked').value;
   document.getElementById('f-parcelas-wrap').style.display=val==='parcelado'?'block':'none';
   document.getElementById('f-fixo-wrap').style.display=val==='fixo'?'block':'none';
-  // Mostrar checkbox de conta fixa apenas para fixo ou parcelado
+  // Mostrar checkbox de conta fixa para todos os tipos
   const cfWrap=document.getElementById('f-conta-fixa-wrap');
-  if(cfWrap)cfWrap.style.display=(val==='fixo'||val==='parcelado')?'block':'none';
-  // Se não mostrar, desmarcar o checkbox
-  if(val==='unico'){
-    const cb=document.getElementById('f-is-conta-fixa');
-    if(cb){cb.checked=false;}
-    const extras=document.getElementById('f-conta-fixa-extras');
-    if(extras)extras.style.display='none';
-  }
+  if(cfWrap)cfWrap.style.display='block';
   // Update radio label styles
   document.getElementById('rec-unico-label').style.borderColor=val==='unico'?'var(--purple2)':'#E5E7EB';
   document.getElementById('rec-unico-label').style.color=val==='unico'?'var(--purple2)':'var(--text2)';
@@ -3918,6 +3930,14 @@ function addFin(){
 
   if(recorrencia==='unico'){
     fins.unshift({id:uid(),tipo,desc,valor:val,data:dataBase,cat,recorrencia:'unico'});
+    // Se marcado como conta fixa, adicionar ao painel de contas fixas
+    if(isContaFixa){
+      const icon=document.getElementById('f-cf-icon').value||'📌';
+      const vence=parseInt(document.getElementById('f-cf-vence').value)||parseInt(dataBase?dataBase.slice(8,10):'1')||1;
+      const contas=S.arr('contas_fixas');
+      contas.push({id:grupoId,icon,label:desc,val,vence,pago:false,tipo:'unico',parcelasTotal:1,parcelasPagas:0,fromLancamento:true});
+      S.set('contas_fixas',contas);
+    }
   } else if(recorrencia==='parcelado'){
     const parcelas=parseInt(document.getElementById('f-parcelas').value)||1;
     for(let i=0;i<parcelas;i++){
@@ -5155,7 +5175,7 @@ function renderFin(){
   }
 }
 
-function deleteFin(id){S.set('financeiro',S.arr('financeiro').filter(f=>f.id!==id));renderFin();if(document.getElementById('page-dashboard').classList.contains('active'))renderFinDash();if(document.getElementById('modal-todas-receitas').classList.contains('open'))renderTodasReceitas();if(document.getElementById('modal-todas-despesas').classList.contains('open'))renderTodasDespesas();}
+function deleteFin(id){S.set('financeiro',S.arr('financeiro').filter(f=>f.id!==id));renderFin();if(document.getElementById('page-dashboard').classList.contains('active'))renderFinDash();if(document.getElementById('modal-todas-receitas').classList.contains('open'))renderTodasReceitas();if(document.getElementById('modal-todas-despesas').classList.contains('open'))renderTodasDespesas();if(document.getElementById('modal-todos-lancamentos').classList.contains('open'))renderTodosLancamentos();}
 
 function abrirTodasReceitas(){
   openModal('modal-todas-receitas');
@@ -5211,6 +5231,45 @@ function renderTodasDespesas(){
     <button onclick="deleteFin('${d.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="ti ti-trash" style="font-size:12px"></i></button>
   </div>`).join(''):'<div style="font-size:12px;color:var(--text3);padding:16px 0;text-align:center">Nenhuma despesa lançada.</div>';
   const tot=document.getElementById('modal-desp-total');if(tot)tot.textContent=fmtR(total);
+}
+
+function abrirTodosLancamentos(){
+  openModal('modal-todos-lancamentos');
+  renderTodosLancamentos();
+}
+function renderTodosLancamentos(){
+  const fins=S.arr('financeiro');
+  const fmtR=(v)=>'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const tipoSel=document.getElementById('tl-filter-tipo');
+  const catSel=document.getElementById('tl-filter-cat');
+  const tipoVal=tipoSel?tipoSel.value:'';
+  const catVal=catSel?catSel.value:'';
+  if(catSel){
+    const allCats=[...new Set(fins.map(f=>f.cat||'Outros'))].sort();
+    const prev=catSel.value;
+    catSel.innerHTML='<option value="">Todas categorias</option>'+allCats.map(c=>`<option value="${c}">${c}</option>`).join('');
+    catSel.value=prev;
+  }
+  const filtradas=fins.filter(f=>{
+    if(tipoVal && f.tipo!==tipoVal)return false;
+    if(catVal && (f.cat||'Outros')!==catVal)return false;
+    return true;
+  }).sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+  const totalRec=filtradas.filter(f=>f.tipo==='receita').reduce((a,b)=>a+(b.valor||0),0);
+  const totalDesp=filtradas.filter(f=>f.tipo==='despesa').reduce((a,b)=>a+(b.valor||0),0);
+  const el=document.getElementById('modal-todos-list');
+  if(el)el.innerHTML=filtradas.length?filtradas.map(f=>`<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #F3F4F6">
+    <div style="width:32px;height:32px;border-radius:8px;background:${f.tipo==='receita'?'#ECFDF5':'#FEF2F2'};display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-${f.tipo==='receita'?'trending-up':'trending-down'}" style="color:${f.tipo==='receita'?'#10B981':'#EF4444'};font-size:14px"></i></div>
+    <div style="flex:1">
+      <div style="font-size:12px;font-weight:600;color:var(--text)">${f.desc}</div>
+      <div style="font-size:10px;color:var(--text3)">${f.cat||''}${f.data?' · '+new Date(f.data+'T12:00').toLocaleDateString('pt-BR'):''}${f.recorrencia&&f.recorrencia!=='unico'?' · <span style="background:#EDE9FE;color:#8B5CF6;padding:1px 6px;border-radius:99px;font-size:9px;font-weight:700">'+(f.recorrencia==='fixo'?'Fixo':'Parcelado')+'</span>':''}</div>
+    </div>
+    <div style="font-size:12px;font-weight:700;color:${f.tipo==='receita'?'#10B981':'#EF4444'}">${fmtR(f.valor||0)}</div>
+    <button onclick="deleteFin('${f.id}');renderTodosLancamentos();" style="background:none;border:none;color:var(--text3);cursor:pointer"><i class="ti ti-trash" style="font-size:12px"></i></button>
+  </div>`).join(''):'<div style="font-size:12px;color:var(--text3);padding:20px 0;text-align:center"><i class="ti ti-currency-dollar" style="font-size:32px;display:block;margin-bottom:8px;opacity:.2"></i>Nenhum lançamento encontrado.</div>';
+  const countEl=document.getElementById('tl-count-label');if(countEl)countEl.textContent=filtradas.length+' lançamento(s)';
+  const recEl=document.getElementById('modal-tl-rec');if(recEl)recEl.textContent=fmtR(totalRec);
+  const despEl=document.getElementById('modal-tl-desp');if(despEl)despEl.textContent=fmtR(totalDesp);
 }
 
 // ESTUDOS
